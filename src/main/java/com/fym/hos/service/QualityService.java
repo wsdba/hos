@@ -1,8 +1,7 @@
 package com.fym.hos.service;
 
-import org.springframework.data.domain.Page;
-
-import com.fym.hos.entity.PageQueryDto;
+import com.fym.hos.dto.PageDto;
+import com.fym.hos.dto.PageQueryDto;
 import com.fym.hos.entity.TQuality;
 
 public interface QualityService {
@@ -16,5 +15,5 @@ public interface QualityService {
 	
 	void removeMulti(String ids);
 	
-	Page<TQuality> page(PageQueryDto<TQuality> page);
+	PageDto<TQuality> page(PageQueryDto<TQuality> page);
 }

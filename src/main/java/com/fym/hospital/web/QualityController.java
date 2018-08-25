@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fym.hos.entity.GlobalResponse;
-import com.fym.hos.entity.PageQueryDto;
+import com.fym.hos.dto.GlobalResponse;
+import com.fym.hos.dto.PageQueryDto;
 import com.fym.hos.entity.TQuality;
 import com.fym.hos.service.QualityService;
 
@@ -26,26 +26,25 @@ public class QualityController {
 	@PostMapping("/")
 	public GlobalResponse<TQuality> add(@RequestBody TQuality tQuality){
 		qualityService.save(tQuality);
-		return new GlobalResponse<TQuality>();
+		return new GlobalResponse<TQuality>(0,"保存成功");
 	}
 	
 
 	@DeleteMapping("/{id}")
 	public GlobalResponse<TQuality> delete(@PathVariable String id ){
 		qualityService.delete(id);
-		return new GlobalResponse<TQuality>();
+		return new GlobalResponse<TQuality>(0,"删除成功");
 	}
 	
 	@GetMapping("/")
 	public GlobalResponse<TQuality> page(PageQueryDto<TQuality> page){
-		qualityService.page(page);
-		return new GlobalResponse<TQuality>();
+		return new GlobalResponse<TQuality>(qualityService.page(page));
 	}
 	 
 	@PutMapping("/{id}")
 	public GlobalResponse<TQuality> update(@PathVariable String id ,@RequestBody TQuality tQuality){
 		qualityService.save(tQuality);
-		return new GlobalResponse<TQuality>();
+		return new GlobalResponse<TQuality>(0,"更新成功");
 	}
 	
 	 
