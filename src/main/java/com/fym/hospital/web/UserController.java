@@ -4,11 +4,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/hos/quality")
 public class UserController {
 
-	@RequestMapping("/toJson")
-	public String toPage(String page){
-		return page;
-	}
+	 
 }

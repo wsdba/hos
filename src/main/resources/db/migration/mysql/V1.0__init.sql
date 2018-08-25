@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS user ;
 CREATE TABLE `user` (
-  `id` varchar(32) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `name` varchar(20) NOT NULL COMMENT '姓名',
   `age` int(5) DEFAULT NULL COMMENT '年龄',
   PRIMARY KEY (`id`)
