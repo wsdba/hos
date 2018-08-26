@@ -4,7 +4,7 @@ public class PageQueryDto<T> {
 	private int currentPage;
 	private int totalPage;
 	private int pageSize;
-	private T t;
+	private T search  ;
 
 	public int getCurrentPage() {
 		return currentPage;
@@ -30,12 +30,12 @@ public class PageQueryDto<T> {
 		this.totalPage = totalPage;
 	}
 
-	public T getT() {
-		return t;
+	public T getSearch() {
+		return search;
 	}
 
-	public void setT(T t) {
-		this.t = t;
+	public void setSearch(T search) {
+		this.search = search;
 	}
 
 }

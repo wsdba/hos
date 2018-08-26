@@ -5,9 +5,11 @@ import com.fym.hos.dto.PageQueryDto;
 import com.fym.hos.dto.TQualityDto;
 import com.fym.hos.entity.TQuality;
 
+import java.util.List;
+
 public interface QualityService {
 
-	void save(TQuality tQuality);
+	TQualityDto save(TQuality tQuality);
 
 	@Deprecated
 	void saveAndUpdate(TQuality tQuality);
@@ -16,7 +18,11 @@ public interface QualityService {
 
 	void removeMulti(String ids);
 
-	PageDto<TQuality> page(PageQueryDto<TQuality> page);
+	PageDto<TQualityDto> page(PageQueryDto<TQuality> page,String theName);
 
 	TQualityDto get(String id);
+
+	List<TQualityDto> findAll(String theName);
+
+	PageDto<TQualityDto> pageByApp(PageQueryDto<TQuality> page,String theName);
 }

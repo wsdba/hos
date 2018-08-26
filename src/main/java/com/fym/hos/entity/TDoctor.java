@@ -46,9 +46,9 @@ public class TDoctor implements Serializable {
 	@Column(name="the_sex")
 	private int theSex;
 
-	//bi-directional many-to-one association to TPatient
-	@OneToMany(mappedBy="TDoctor")
-	private List<TPatient> TPatients;
+	//bi-directional many-to-one association to TPatientt
+	@OneToMany(mappedBy="doctor", fetch=FetchType.LAZY)
+	private List<TPatient> patients;
 
 	public TDoctor() {
 	}
@@ -141,26 +141,11 @@ public class TDoctor implements Serializable {
 		this.theSex = theSex;
 	}
 
-	public List<TPatient> getTPatients() {
-		return this.TPatients;
+	public List<TPatient> getPatients() {
+		return patients;
 	}
 
-	public void setTPatients(List<TPatient> TPatients) {
-		this.TPatients = TPatients;
+	public void setPatients(List<TPatient> patients) {
+		this.patients = patients;
 	}
-
-	public TPatient addTPatient(TPatient TPatient) {
-		getTPatients().add(TPatient);
-		TPatient.setTDoctor(this);
-
-		return TPatient;
-	}
-
-	public TPatient removeTPatient(TPatient TPatient) {
-		getTPatients().remove(TPatient);
-		TPatient.setTDoctor(null);
-
-		return TPatient;
-	}
-
 }

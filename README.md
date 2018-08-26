@@ -13,11 +13,19 @@
 
 # 4.API
  - 4.1 质控人员管理
-               增：/hos/quality/   参数：TQualily   METHOD : POST
-               删：/hos/quality/{id}    参数：id    DELETE
-               查： /hos/quality/    参数： Page<T> page index,totalpage totalcount  GET
-               改：/host/quality/{id}   参数：TQualily   PUT
-  
+ 
+        - web 
+               增：/hos/quality/                     参数：TQuality                     METHOD : POST       
+               删：/hos/quality/{id}                 参数：id                           METHOD : DELETE
+               删：/hos/quality/removeMulti          参数：ids                          METHOD : DELETE
+               查： /hos/quality/                    参数：PageQueryDto<TQuality>       METHOD :  GET
+               改：/host/quality/{id}                参数：TQuality                     METHOD :  PUT
+         
+         
+        -  App 特殊方法
+                查： /hos/quality/findAll       参数：theName                                             METHOD :  GET
+                查：/hos/quality/pageByApp      参数：PageQueryDto<TQuality> page, String theName         METHOD :  GET
+                
  - 4.2 床位医生增删查改
  
  - 4.3 病例增删查改 
