@@ -15,6 +15,7 @@ public class CommonController {
 	
 	@RequestMapping("/index")
 	public String add(String a){
+		System.out.println("welcome");
 		return "admin/welcome";
 	}
 	@RequestMapping
