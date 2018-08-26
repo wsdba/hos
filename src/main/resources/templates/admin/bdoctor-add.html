@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>添加医生</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta>
+    <link rel="stylesheet" href="/../layui/css/layui.css"/>
+    <link rel="stylesheet" href="/../css/scroll-bar.css"/>
+    <link rel="stylesheet" href="/../css/sub-page.css"/>
+     <link rel="stylesheet" href="/../css/ .css"/>
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_693759_wytlyqhtdtj1nhfr.css"/>
+</head>
+<body>
+<div class="ok-body">
+    <!--面包屑导航区域-->
+    <!--form表单-->
+    <form class="layui-form layui-form-pane ok-form">
+        <div class="layui-form-item ">
+            <label class="layui-form-label">姓名</label>
+	            <div class="layui-input-block">
+	                <input type="text" name="name" placeholder="请输入质管姓名" autocomplete="off" class="layui-input" lay-verify="required"/>
+	            </div>
+          </div>
+          <div class="layui-form-item "> 
+		            <label class="layui-form-label">年龄</label>
+		            <div class="layui-input-block">
+		                <input type="text" name="age" placeholder="请输入年龄" autocomplete="off" class="layui-input" lay-verify="required"/>
+		            </div>
+           </div>
+            
+        <div class="layui-form-item">
+	         <div class="layui-inline  ">
+         	 <label class="layui-form-label">性别</label>
+            <div class="layui-input-block">
+                <input type="radio" name="sex" value="0" title="男"/>
+                <input type="radio" name="sex" value="1" title="女" />
+            </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn"  lay-filter="add">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+      </form>
+   </div>
+<!--js逻辑-->
+<script src="/../layui/layui.js"></script>
+<script>
+    layui.use(['element', 'form', 'jquery', 'laydate'], function () {
+        var element = layui.element;
+        var table = layui.table;
+        var form = layui.form;
+        var $ = layui.jquery;
+        var laydate = layui.laydate;
+
+        laydate.render({
+            elem: '#inTime',
+            type: "datetime"
+        });
+        laydate.render({
+            elem: '#outTime',
+            type: "datetime"
+        });
+        laydate.render({
+            elem: '#recordTime',
+            type: "datetime"
+        });
+        laydate.render({
+            elem: '#qualityTime',
+            type: "datetime"
+        });
+        form.on('submit(add)', function (data) {
+            console.log(data.field);
+            layer.msg("添加成功！", {icon: 6, time: 1000, anim: 4}, function () {
+                parent.layer.close(parent.layer.getFrameIndex(window.name));
+            });
+            return false;
+        });
+    })
+</script>
+</body>
+</html>
