@@ -1,6 +1,8 @@
 .half_table {
 
-    width : 49.5%
+    width : 48.5%;
+    float : left;
+    display : inline-block
 }
 .inline {
 }

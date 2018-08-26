@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8"></meta>
-    <title>添加用户</title>
+    <title>添加病例</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta>
     <link rel="stylesheet" href="/../layui/css/layui.css"/>
     <link rel="stylesheet" href="/../css/scroll-bar.css"/>
@@ -30,30 +30,28 @@
             </div>
           </div>
         <div class="layui-form-item">
-          	<div class="half_table">
+          	<div class="layui-inline half_table">
 	            <label class="layui-form-label">姓名</label>
 	            <div class="layui-input-block">
 	                <input type="text" name="name" placeholder="请输入姓名" autocomplete="off" class="layui-input" lay-verify="phone"/>
 	            </div>
 	         </div>
-        </div>
-        <div class="layui-form-item">
+	         <div class="layui-inline half_table">
          	 <label class="layui-form-label">性别</label>
             <div class="layui-input-block">
                 <input type="radio" name="sex" value="0" title="男"/>
                 <input type="radio" name="sex" value="1" title="女" />
             </div>
+            </div>
         </div>
         <div class="layui-form-item">
-          <div class="half_table">
+         <div class="layui-inline half_table">
             <label class="layui-form-label">年龄</label>
             <div class="layui-input-block">
                 <input type="text" name="age" placeholder="请输入年龄" autocomplete="off" class="layui-input" lay-verify="required"/>
             </div>
             </div>
-        </div>
-        <div class="layui-form-item">
-       	  <div class="half_table">
+       	  <div class="layui-inline half_table">
             <label class="layui-form-label">床位医生</label>
             <div class="layui-input-block">
                 <input type="text" name="doctor" placeholder="请输入床位医生" autocomplete="off" class="layui-input" id="birthday" lay-verify="birthdayVerify"/>
@@ -61,31 +59,27 @@
             </div>
         </div>
          <div class="layui-form-item">
-       	  <div class="half_table">
-            <label class="layui-form-label">入院时间</label>
-            <div class="layui-input-block">
-                <input type="text" name="inTime" placeholder="请输入住院时间" autocomplete="off" class="layui-input" id="birthday" lay-verify="birthdayVerify"/>
+       	 	<div class="layui-inline half_table">
+	            <label class="layui-form-label">入院时间</label>
+		            <div class="layui-input-block">
+		               <input name="date" id="inTime" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input"  type="text"/>		         
+		        	 </div>
             </div>
-            </div>
-        </div>
-        <div class="layui-form-item">
-       	  <div class="half_table">
+       	  <div class="layui-inline half_table">
             <label class="layui-form-label">出院时间</label>
             <div class="layui-input-block">
-                <input type="text" name="outTime" placeholder="请输入出院时间" autocomplete="off" class="layui-input" id="birthday" lay-verify="birthdayVerify"/>
-            </div>
+               <input name="date" id="outTime" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input"  type="text"/>		           
+                </div>
             </div>
         </div>
         <div class="layui-form-item">
-       	  <div class="half_table">
+       	  <div class="layui-inline half_table">
             <label class="layui-form-label">入院诊断</label>
             <div class="layui-input-block">
                 <input type="text" name="inDiagnose" placeholder="请输入入院诊断" autocomplete="off" class="layui-input" id="birthday" lay-verify="birthdayVerify"/>
             </div>
             </div>
-        </div>
-        <div class="layui-form-item">
-       	  <div class="half_table">
+       	  <div class="layui-inline half_table">
             <label class="layui-form-label">出院诊断</label>
             <div class="layui-input-block">
                 <input type="text" name="outDiagnose" placeholder="请输入出院诊断" autocomplete="off" class="layui-input" id="birthday" lay-verify="birthdayVerify"/>
@@ -93,47 +87,39 @@
             </div>
         </div>
         <div class="layui-form-item">
-       	  <div class="half_table">
+       	  <div class="layui-inline half_table">
             <label class="layui-form-label">归档人</label>
             <div class="layui-input-block">
                 <input type="text" name="recordMan" placeholder="请输入归档人" autocomplete="off" class="layui-input" id="birthday" lay-verify="birthdayVerify"/>
             </div>
             </div>
-        </div>
-        <div class="layui-form-item">
-       	  <div class="half_table">
+       	  <div class="layui-inline half_table">
             <label class="layui-form-label">归档时间</label>
             <div class="layui-input-block">
-                <input type="text" name="recordTime" placeholder="请输入归档时间" autocomplete="off" class="layui-input" id="birthday" lay-verify="birthdayVerify"/>
-            </div>
+                <input name="date" id="recordTime" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input"  type="text"/>		            </div>
             </div>
         </div>
         <div class="layui-form-item">
-       	  <div class="half_table">
+       	  <div class="layui-inline half_table">
             <label class="layui-form-label">质控人</label>
             <div class="layui-input-block">
                 <input type="text" name="qualityMan" placeholder="请输入归档人" autocomplete="off" class="layui-input" id="birthday" lay-verify="birthdayVerify"/>
             </div>
             </div>
-        </div>
-        <div class="layui-form-item">
-       	  <div class="half_table">
+       	  <div class="layui-inline half_table">
             <label class="layui-form-label">质控时间</label>
             <div class="layui-input-block">
-                <input type="text" name="qualityTime" placeholder="请输入质控时间" autocomplete="off" class="layui-input" id="birthday" lay-verify="birthdayVerify"/>
-            </div>
+               <input name="date" id="qualityTime" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input"   type="text"/>		            </div>
             </div>
         </div>
         <div class="layui-form-item">
-       	  <div class="half_table">
+       	  <div class="layui-inline half_table">
             <label class="layui-form-label">入出相符</label>
             <div class="layui-input-block">
-                <input type="text" name="sample" placeholder="请输入如初相符" autocomplete="off" class="layui-input" id="birthday" lay-verify="birthdayVerify"/>
+                <input type="text" name="sample" placeholder="请输入入出相符" autocomplete="off" class="layui-input" id="birthday" lay-verify="birthdayVerify"/>
             </div>
             </div>
-        </div>
-         <div class="layui-form-item">
-       	  <div class="half_table">
+       	  <div class="layui-inline half_table">
             <label class="layui-form-label">期内归档</label>
             <div class="layui-input-block">
                 <input type="text" name="giveBack" placeholder="请输入期内归档" autocomplete="off" class="layui-input" id="birthday" lay-verify="birthdayVerify"/>
@@ -142,16 +128,14 @@
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">兴趣</label>
-              <div class="half_table">
+             <div class="layui-inline half_table">
             <div class="layui-input-block">
                 <input type="checkbox" name="like[write]" title="写作"/>
                 <input type="checkbox" name="like[read]" title="阅读"/>
                 <input type="checkbox" name="like[run]" title="运动"/>
             </div>
             </div>
-        </div>
-        <div class="layui-form-item layui-form-text">
-          <div class="half_table">
+            <div class="layui-inline half_table layui-form-text">
             <label class="layui-form-label">备注</label>
             <div class="layui-input-block">
                 <textarea name="remarks" placeholder="请输入内容" class="layui-textarea"></textarea>
@@ -177,14 +161,21 @@
         var laydate = layui.laydate;
 
         laydate.render({
-            elem: '#birthday',
+            elem: '#inTime',
             type: "datetime"
         });
-
-        form.verify({
-            birthdayVerify: [/^((((1[6-9]|[2-9]\d)\d{2})-(0?[13578]|1[02])-(0?[1-9]|[12]\d|3[01]))|(((1[6-9]|[2-9]\d)\d{2})-(0?[13456789]|1[012])-(0?[1-9]|[12]\d|30))|(((1[6-9]|[2-9]\d)\d{2})-0?2-(0?[1-9]|1\d|2[0-8]))|(((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))-0?2-29-))(\s(([01]\d{1})|(2[0123])):([0-5]\d):([0-5]\d))?$/, '日期格式不正确']
+        laydate.render({
+            elem: '#outTime',
+            type: "datetime"
         });
-
+        laydate.render({
+            elem: '#recordTime',
+            type: "datetime"
+        });
+        laydate.render({
+            elem: '#qualityTime',
+            type: "datetime"
+        });
         form.on('submit(add)', function (data) {
             console.log(data.field);
             layer.msg("添加成功！", {icon: 6, time: 1000, anim: 4}, function () {
