@@ -15,7 +15,6 @@ import java.math.BigInteger;
  */
 @Entity
 @Table(name="t_patient")
-@NamedQuery(name="TPatient.findAll", query="SELECT t FROM TPatient t")
 public class TPatient implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -87,12 +86,12 @@ public class TPatient implements Serializable {
 	//bi-directional many-to-one association to TQuality
 	@ManyToOne
 	@JoinColumn(name="quality_id")
-	private TQuality TQuality;
+	private TQuality  quality;
 
 	//bi-directional many-to-one association to TDoctor
 	@ManyToOne
 	@JoinColumn(name="doctor_id")
-	private TDoctor TDoctor;
+	private TDoctor doctor;
 
 	public TPatient() {
 	}
@@ -273,20 +272,27 @@ public class TPatient implements Serializable {
 		this.theSex = theSex;
 	}
 
-	public TQuality getTQuality() {
-		return this.TQuality;
+	public BigInteger gethNumber() {
+		return hNumber;
 	}
 
-	public void setTQuality(TQuality TQuality) {
-		this.TQuality = TQuality;
+	public void sethNumber(BigInteger hNumber) {
+		this.hNumber = hNumber;
 	}
 
-	public TDoctor getTDoctor() {
-		return this.TDoctor;
+	public TQuality getQuality() {
+		return quality;
 	}
 
-	public void setTDoctor(TDoctor TDoctor) {
-		this.TDoctor = TDoctor;
+	public void setQuality(TQuality quality) {
+		this.quality = quality;
 	}
 
+	public TDoctor getDoctor() {
+		return doctor;
+	}
+
+	public void setDoctor(TDoctor doctor) {
+		this.doctor = doctor;
+	}
 }

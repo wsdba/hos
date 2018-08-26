@@ -49,8 +49,8 @@ public class TQuality implements Serializable {
 	private int theSex;
 
 	// bi-directional many-to-one association to TPatient
-	@OneToMany(mappedBy = "TQuality")
-	private List<TPatient> TPatients;
+ 	@OneToMany(mappedBy = "quality", fetch=FetchType.LAZY)
+	private List<TPatient> patients;
 
 	public TQuality() {
 	}
@@ -134,20 +134,11 @@ public class TQuality implements Serializable {
 	public void setTheSex(int theSex) {
 		this.theSex = theSex;
 	}
-
-	public List<TPatient> getTPatients() {
-		return this.TPatients;
+	public List<TPatient> getPatients() {
+		return patients;
 	}
 
-	public void setTPatients(List<TPatient> TPatients) {
-		this.TPatients = TPatients;
+	public void setPatients(List<TPatient> patients) {
+		this.patients = patients;
 	}
-
-	@Override
-	public String toString() {
-		return "TQuality [id=" + id + ", f1=" + f1 + ", f2=" + f2 + ", f3=" + f3 + ", f4=" + f4 + ", f5=" + f5
-				+ ", theAge=" + theAge + ", theDesc=" + theDesc + ", theName=" + theName + ", theSex=" + theSex
-				+ ", TPatients=" + TPatients + "]";
-	}
-
 }
