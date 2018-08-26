@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fym.hos.entity.GlobalResponse;
 import com.fym.hos.entity.TQuality;
 import com.fym.hos.service.QualityService;
 
