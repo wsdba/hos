@@ -1,5 +1,6 @@
 package com.fym.hos.service.impl;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fym.hos.dao.QualityRepository;
 import com.fym.hos.dto.PageDto;
 import com.fym.hos.dto.PageQueryDto;
+import com.fym.hos.dto.TQualityDto;
 import com.fym.hos.entity.TQuality;
 import com.fym.hos.service.QualityService;
 
@@ -49,6 +51,14 @@ public class QualityServiceImpl implements QualityService {
 		Page<TQuality> findAll = qualityRepository.findAll(pageable);
 		return new PageDto<TQuality>(findAll.getNumber(), findAll.getTotalPages(), findAll.getSize(),
 				findAll.getContent());
+	}
+
+	@Override
+	public TQualityDto get(String id) {
+		TQuality tQuality = qualityRepository.getOne(id);
+		TQualityDto target = new TQualityDto();
+		BeanUtils.copyProperties(tQuality, target);
+		return target;
 	}
 
 }

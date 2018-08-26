@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fym.hos.dto.GlobalResponse;
 import com.fym.hos.dto.PageQueryDto;
+import com.fym.hos.dto.TQualityDto;
 import com.fym.hos.entity.TQuality;
 import com.fym.hos.service.QualityService;
 
@@ -39,6 +40,12 @@ public class QualityController {
 	@GetMapping("/")
 	public GlobalResponse<TQuality> page(PageQueryDto<TQuality> page){
 		return new GlobalResponse<TQuality>(qualityService.page(page));
+	}
+	
+	
+	@GetMapping("/{id}")
+	public GlobalResponse<TQualityDto> get(@PathVariable String id){
+		return new GlobalResponse<TQualityDto>(qualityService.get(id));
 	}
 	 
 	@PutMapping("/{id}")

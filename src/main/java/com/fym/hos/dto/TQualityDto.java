@@ -1,4 +1,4 @@
-package com.fym.hos.entity;
+package com.fym.hos.dto;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -8,19 +8,13 @@ import org.hibernate.annotations.GenericGenerator;
 import java.util.List;
 
 /**
- * 质控人员类
+ * 质控人员 数据展示类
  * 
  * @author fp
- * @since 2018-08-25
+ * @date 2018-08-25
  */
-@Entity
-@Table(name = "t_quality")
-@NamedQuery(name = "TQuality.findAll", query = "SELECT t FROM TQuality t")
-public class TQuality implements Serializable {
+public class TQualityDto {
 	private static final long serialVersionUID = 1L;
-	@Id
-	@GenericGenerator(name = "idGenerator", strategy = "uuid") // 这个是hibernate的注解/生成32位UUID
-	@GeneratedValue(generator = "idGenerator")
 	private String id;
 
 	private String f1;
@@ -36,23 +30,15 @@ public class TQuality implements Serializable {
 	/**
 	 * 年龄
 	 */
-	@Column(name = "the_age")
 	private int theAge;
 
-	@Column(name = "the_desc")
 	private String theDesc;
 
-	@Column(name = "the_name")
 	private String theName;
 
-	@Column(name = "the_sex")
 	private int theSex;
 
-	// bi-directional many-to-one association to TPatient
-	@OneToMany(mappedBy = "TQuality")
-	private List<TPatient> TPatients;
-
-	public TQuality() {
+	public TQualityDto() {
 	}
 
 	public String getId() {
@@ -133,21 +119,6 @@ public class TQuality implements Serializable {
 
 	public void setTheSex(int theSex) {
 		this.theSex = theSex;
-	}
-
-	public List<TPatient> getTPatients() {
-		return this.TPatients;
-	}
-
-	public void setTPatients(List<TPatient> TPatients) {
-		this.TPatients = TPatients;
-	}
-
-	@Override
-	public String toString() {
-		return "TQuality [id=" + id + ", f1=" + f1 + ", f2=" + f2 + ", f3=" + f3 + ", f4=" + f4 + ", f5=" + f5
-				+ ", theAge=" + theAge + ", theDesc=" + theDesc + ", theName=" + theName + ", theSex=" + theSex
-				+ ", TPatients=" + TPatients + "]";
 	}
 
 }
