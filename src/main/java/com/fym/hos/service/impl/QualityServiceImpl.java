@@ -1,23 +1,23 @@
 package com.fym.hos.service.impl;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fym.hos.dao.QualityRepository;
-import com.fym.hos.entity.PageQueryDto;
+import com.fym.hos.dto.PageDto;
+import com.fym.hos.dto.PageQueryDto;
 import com.fym.hos.entity.TQuality;
 import com.fym.hos.service.QualityService;
 
 @Service
-public class QualityServiceImpl  implements QualityService{
+public class QualityServiceImpl implements QualityService {
 
 	@Autowired
 	private QualityRepository qualityRepository;
-	
+
 	@Override
 	@Transactional
 	public void save(TQuality tQuality) {
@@ -37,18 +37,18 @@ public class QualityServiceImpl  implements QualityService{
 	@Transactional
 	public void removeMulti(String ids) {
 		String[] id = ids.split(",");
-		for(int i = 0 ; i<id.length;i++){
+		for (int i = 0; i < id.length; i++) {
 			qualityRepository.delete(id[i]);
 		}
 	}
-		
+
 	@Override
-	public Page<TQuality> page(PageQueryDto<TQuality> page) {
+	@Transactional(readOnly = true)
+	public PageDto<TQuality> page(PageQueryDto<TQuality> page) {
 		PageRequest pageable = new PageRequest(0, 10);
-		return qualityRepository.findAll(pageable);
+		Page<TQuality> findAll = qualityRepository.findAll(pageable);
+		return new PageDto<TQuality>(findAll.getNumber(), findAll.getTotalPages(), findAll.getSize(),
+				findAll.getContent());
 	}
-	
-	 
-	
-	
+
 }
