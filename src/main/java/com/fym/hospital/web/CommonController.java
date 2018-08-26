@@ -5,9 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.fym.hos.entity.TQuality;
 import com.fym.hos.service.QualityService;
 
 @Controller
@@ -19,6 +16,7 @@ public class CommonController {
 	
 	@RequestMapping("/index")
 	public String add(String a){
+		System.out.println("hello");
 		return "admin/welcome";
 	}
 	@RequestMapping
