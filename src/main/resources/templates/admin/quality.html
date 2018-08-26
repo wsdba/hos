@@ -109,11 +109,6 @@
         });
 
         table.on('tool(tableFilter)', function (obj) {
-            var data = obj.data;
-            console.log(data)
-            var layEvent = obj.event;
-            console.log(obj)
-            console.log(layEvent)
             if (layEvent === 'edit') {
                 layer.open({
                     title: '编辑用户',
@@ -160,7 +155,12 @@
         })
   
         $("#batchDisabled").click(function (obj) {
-        	console.log(obj)
+        	var checkStatus  = table.checkStatus('tableId');
+        	var  d =  checkStatus.data;
+        	if(d.length!=1){
+        		layer.msg('只能选择一条数据', {icon: 5});
+        		return;
+        	}
         	layer.open({
                 title: '修改质控人员',
                 type: 2,
@@ -168,7 +168,7 @@
                 maxmin: true,
                 shade: 0.5,
                 anim: 4,
-                area: ['30%', '40%'],
+                area: ['35%', '53%'],
                 content: 'to?page=admin/quality-add',
                 zIndex: layer.zIndex,
                 // skin: 'layui-layer-molv',
@@ -201,7 +201,8 @@
         	var checkStatus  = table.checkStatus('tableId');
         	var  d =  checkStatus.data;
         	if(d.length==0){
-        		layer
+        		layer.msg('请至少选择一条数据', {icon: 5});
+        		return;
         	}
             layer.confirm("确定要删除吗？", {skin: 'layui-layer-lan', icon: 2, title: '提示', anim: 6}, function () {
                 var checkStatus = table.checkStatus('tableId');
@@ -232,7 +233,7 @@
                 maxmin: true,
                 shade: 0.5,
                 anim: 4,
-                area: ['30%', '40%'],
+                area: ['35%', '53%'],
                 content: 'to?page=admin/quality-add',
                 zIndex: layer.zIndex,
                 // skin: 'layui-layer-molv',

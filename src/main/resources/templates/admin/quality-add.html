@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html >
 <head>
     <meta charset="UTF-8"></meta>
     <title>添加质管人员</title>
@@ -14,11 +14,11 @@
 <div class="ok-body">
     <!--面包屑导航区域-->
     <!--form表单-->
-    <form class="layui-form layui-form-pane ok-form">
+    <form class="layui-form layui-form-pane ok-form" method="post">
         <div class="layui-form-item ">
             <label class="layui-form-label">姓名</label>
 	            <div class="layui-input-block">
-	                <input type="text" name="name" placeholder="请输入质管姓名" autocomplete="off" class="layui-input" lay-verify="required"/>
+	                <input type="text" name="name"    placeholder="请输入质管姓名" autocomplete="off" class="layui-input" lay-verify="required"/>
 	            </div>
           </div>
           <div class="layui-form-item "> 
@@ -37,9 +37,15 @@
             </div>
             </div>
         </div>
+         <div class=" layui-form-text">
+            <label class="layui-form-label">备注</label>
+            <div class="layui-input-block">
+                <textarea name="remarks" placeholder="请输入内容" class="layui-textarea"></textarea>
+            </div>
+            </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn"  lay-filter="add">立即提交</button>
+                <button class="layui-btn"  lay-submit="" lay-filter="demo1">立即提交</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
@@ -71,11 +77,21 @@
             elem: '#qualityTime',
             type: "datetime"
         });
-        form.on('submit(add)', function (data) {
-            console.log(data.field);
-            layer.msg("添加成功！", {icon: 6, time: 1000, anim: 4}, function () {
-                parent.layer.close(parent.layer.getFrameIndex(window.name));
-            });
+        form.on('submit(demo1)', function (data) {
+        	/*   layer.alert(JSON.stringify(data.field), {
+        	      title: '最终的提交信息'
+        	    }) */
+        	    console.log(JSON.stringify(data.field))
+        	     $.ajax({   
+				      type: "POST",   
+				      url: "/hos/quality/",   
+				      contentType: "application/json; charset=utf-8",
+				      data:JSON.stringify(data.field),
+				      success: function(data) {   
+				      },   
+				      error: function(err) {   
+				      }   
+				    });   
             return false;
         });
     })

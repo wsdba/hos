@@ -122,11 +122,6 @@
         });
 
         table.on('tool(tableFilter)', function (obj) {
-            var data = obj.data;
-            console.log(data)
-            var layEvent = obj.event;
-            console.log(obj)
-            console.log(layEvent)
             if (layEvent === 'edit') {
                 layer.open({
                     title: '编辑用户',
@@ -142,7 +137,6 @@
                     }
                 });
             } else if (layEvent === 'del') {
-            	
                 layer.confirm("确定要删除吗？", {skin: 'layui-layer-lan', icon: 2, title: '提示', anim: 6}, function () {
                     layer.msg("操作成功！", {icon: 1, time: 1000});
                 });
@@ -173,9 +167,14 @@
         })
   
         $("#batchDisabled").click(function (obj) {
-        	console.log(obj)
+        	var checkStatus  = table.checkStatus('tableId');
+        	var  d =  checkStatus.data;
+        	if(d.length!=1){
+            		layer.msg('请选择一条数据编辑', {icon: 5});
+        		return;
+        	}
         	layer.open({
-                title: '添加用户',
+                title: '编辑病人',
                 type: 2,
                 shade: false,
                 maxmin: true,
@@ -189,35 +188,18 @@
                     $(".layui-laypage-btn")[0].click();
                 }
             });
-            /* layer.confirm("确定要批量删除吗？", {skin: 'layui-layer-lan', icon: 3, title: '提示', anim: 2}, function () {
-                var checkStatus = table.checkStatus('tableId');
-                var rows = checkStatus.data.length;
-                if (rows > 0) {
-                    var idsStr = "";
-                    for (var i = 0; i < checkStatus.data.length; i++) {
-                        idsStr += checkStatus.data[i].id + ',';
-                    }
-                    console.log("选择的id-->" + idsStr);
-                    layer.msg("操作成功！", {icon: 1, time: 1000}, function () {
-                        $(".layui-laypage-btn")[0].click();
-                    });
-                } else {
-                    layer.msg('未选择有效数据', {
-                        offset: 't',
-                        anim: 6
-                    });
-                }
-            }); */
         })
 	
         $("#batchDel").click(function () {
         	var checkStatus  = table.checkStatus('tableId');
         	var  d =  checkStatus.data;
+        	console.log(d)
         	if(d.length==0){
-        		layer
+            		layer.msg('请选择至少一条数据', {icon: 5});
+        		return;
         	}
             layer.confirm("确定要删除吗？", {skin: 'layui-layer-lan', icon: 2, title: '提示', anim: 6}, function () {
-                var checkStatus = table.checkStatus('tableId');
+            	
                 var rows = checkStatus.data.length;
                 if (rows > 0) {
                     var idsStr = "";
@@ -239,7 +221,7 @@
 /*]]>*/
         $("#addUser").click(function () {
             layer.open({
-                title: '添加用户',
+                title: '添加病人',
                 type: 2,
                 shade: false,
                 maxmin: true,
@@ -254,11 +236,6 @@
                 }
             });
         })
-    })
-    $("#getQrcode").click(function () {
-    	 layer.msg("操作成功！", {icon: 1, time: 1000}, function () {
-             $(".layui-laypage-btn")[0].click();
-         });
     })
 </script>
 </body>

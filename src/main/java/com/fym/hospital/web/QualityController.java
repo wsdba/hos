@@ -26,6 +26,9 @@ public class QualityController {
 	
 	@PostMapping("/")
 	public GlobalResponse<TQuality> add(@RequestBody TQuality tQuality){
+		System.out.println("====");
+		System.out.println(tQuality.getTheAge());
+		System.out.println(tQuality.getTheName());
 		qualityService.save(tQuality);
 		return new GlobalResponse<TQuality>(0,"保存成功");
 	}

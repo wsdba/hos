@@ -160,7 +160,12 @@
         })
   
         $("#batchDisabled").click(function (obj) {
-        	console.log(obj)
+        	var checkStatus  = table.checkStatus('tableId');
+        	var  d =  checkStatus.data;
+        	if(d.length!=1){
+            		layer.msg('请选择一条数据编辑', {icon: 5});
+        		return;
+        	}
         	layer.open({
                 title: '修改医生',
                 type: 2,
@@ -168,7 +173,7 @@
                 maxmin: true,
                 shade: 0.5,
                 anim: 4,
-                area: ['30%', '40%'],
+                area: ['35%', '53%'],
                 content: 'to?page=admin/bdoctor-add',
                 zIndex: layer.zIndex,
                 // skin: 'layui-layer-molv',
@@ -201,7 +206,8 @@
         	var checkStatus  = table.checkStatus('tableId');
         	var  d =  checkStatus.data;
         	if(d.length==0){
-        		layer
+            		layer.msg('请至少选择一条数据删除', {icon: 5});
+        		return;
         	}
             layer.confirm("确定要删除吗？", {skin: 'layui-layer-lan', icon: 2, title: '提示', anim: 6}, function () {
                 var checkStatus = table.checkStatus('tableId');
@@ -232,7 +238,7 @@
                 maxmin: true,
                 shade: 0.5,
                 anim: 4,
-                area: ['30%', '40%'],
+                area: ['35%', '53%'],
                 content: 'to?page=admin/bdoctor-add',
                 zIndex: layer.zIndex,
                 // skin: 'layui-layer-molv',
