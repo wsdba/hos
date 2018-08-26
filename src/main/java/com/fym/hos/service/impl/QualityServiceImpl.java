@@ -7,10 +7,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
-import com.fym.hos.dto.TQualityDto;
-import com.fym.utils.BeanMapperUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,8 +18,10 @@ import org.springframework.util.StringUtils;
 import com.fym.hos.dao.QualityRepository;
 import com.fym.hos.dto.PageDto;
 import com.fym.hos.dto.PageQueryDto;
+import com.fym.hos.dto.TQualityDto;
 import com.fym.hos.entity.TQuality;
 import com.fym.hos.service.QualityService;
+import com.fym.utils.BeanMapperUtils;
 
 @Service
 public class QualityServiceImpl implements QualityService {
