@@ -10,7 +10,7 @@ import com.fym.hos.entity.TDoctor;
 /**
  * 医生服务类
  * 
- * @author walss
+ * @author fym
  * @since 2018-08-26
  */
 public interface DoctorService {
