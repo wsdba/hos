@@ -13,8 +13,7 @@
 
 # 4.API
  - 4.1 质控人员管理
- 
-        - web 
+ - web 
                增：/hos/quality/                     参数：TQuality                     METHOD : POST       
                删：/hos/quality/{id}                 参数：id                           METHOD : DELETE
                删：/hos/quality/removeMulti          参数：ids                          METHOD : DELETE
@@ -27,9 +26,19 @@
                 查：/hos/quality/pageByApp      参数：PageQueryDto<TQuality> page, String theName         METHOD :  GET
                 
  - 4.2 床位医生增删查改
- 
+  - web 
+               增：/hos//                     参数：TDoctor        	             METHOD : POST       
+               删：/hos/quality/{id}                 参数：id                           METHOD : DELETE
+               删：/hos/quality/removeMulti          参数：ids                          METHOD : DELETE
+               查： /hos/quality/                    参数：PageQueryDto<TDoctor>       METHOD :  GET
+               改：/host/quality/{id}                参数：TQuality                     METHOD :  PUT
  - 4.3 病例增删查改 
- 
+ - web 
+               增：/hos/quality/                     参数：TPatient        	             METHOD : POST       
+               删：/hos/quality/{id}                 参数：id                           METHOD : DELETE
+               删：/hos/quality/removeMulti          参数：ids                          METHOD : DELETE
+               查： /hos/quality/                    参数：PageQueryDto<TPatient>       METHOD :  GET
+               改：/host/quality/{id}                参数：TQuality                     METHOD :  PUT
  - 4.4 二维码生成
  
  
