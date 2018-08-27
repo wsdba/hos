@@ -18,13 +18,13 @@
         <div class="layui-form-item ">
             <label class="layui-form-label">姓名</label>
 	            <div class="layui-input-block">
-	                <input type="text" name="name"    placeholder="请输入质管姓名" autocomplete="off" class="layui-input" lay-verify="required"/>
+	                <input type="text" name="theName"    placeholder="请输入质管姓名" autocomplete="off" class="layui-input" lay-verify="required"/>
 	            </div>
           </div>
           <div class="layui-form-item "> 
 		            <label class="layui-form-label">年龄</label>
 		            <div class="layui-input-block">
-		                <input type="text" name="age" placeholder="请输入年龄" autocomplete="off" class="layui-input" lay-verify="required"/>
+		                <input type="text" name="theAge" placeholder="请输入年龄" autocomplete="off" class="layui-input" lay-verify="required"/>
 		            </div>
            </div>
             
@@ -32,15 +32,15 @@
 	         <div class="layui-inline  ">
          	 <label class="layui-form-label">性别</label>
             <div class="layui-input-block">
-                <input type="radio" name="sex" value="0" title="男"/>
-                <input type="radio" name="sex" value="1" title="女" />
+                <input type="radio" name="theSex" value="0" title="男"/>
+                <input type="radio" name="theSex" value="1" title="女" />
             </div>
             </div>
         </div>
          <div class=" layui-form-text">
             <label class="layui-form-label">备注</label>
             <div class="layui-input-block">
-                <textarea name="remarks" placeholder="请输入内容" class="layui-textarea"></textarea>
+                <textarea name="theDesc" placeholder="请输入内容" class="layui-textarea"></textarea>
             </div>
             </div>
         <div class="layui-form-item">
@@ -78,6 +78,7 @@
             type: "datetime"
         });
         form.on('submit(demo1)', function (data) {
+        	
         	/*   layer.alert(JSON.stringify(data.field), {
         	      title: '最终的提交信息'
         	    }) */
