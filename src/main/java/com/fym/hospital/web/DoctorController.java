@@ -20,12 +20,12 @@ public class DoctorController {
     /**
      * 保存
      *
-     * @param tQuality
+     * @param tDoctor   医生实体
      * @return
      */
     @PostMapping("/")
-    public GlobalResponse<TDoctor> add(@RequestBody TDoctor tQuality) {
-    	doctorService.save(tQuality);
+    public GlobalResponse<TDoctor> add(@RequestBody TDoctor tDoctor) {
+    	doctorService.save(tDoctor);
         return new GlobalResponse<TDoctor>(0, "保存成功");
     }
 
@@ -45,8 +45,8 @@ public class DoctorController {
     /**
      * 分页
      *
-     * @param page
-     * @param theName
+     * @param page        分页条件
+     * @param theName     模糊查询条件（姓名）
      * @return
      */
     @GetMapping("/")
@@ -58,7 +58,7 @@ public class DoctorController {
     /**
      * 查询所有
      *
-     * @param theName
+     * @param theName   模糊查询（姓名或描述）来查询
      * @return
      */
     @GetMapping("/findAll")
@@ -70,8 +70,8 @@ public class DoctorController {
     /**
      * 提供给app的分页查询
      *
-     * @param page
-     * @param theName
+     * @param page        分页条件
+     * @param theName	 模糊查询条件
      * @return
      */
     @GetMapping("/pageByApp")
@@ -94,7 +94,7 @@ public class DoctorController {
      * 根据id更新数据
      *
      * @param id
-     * @param tQuality
+     * @param tDoctor      医生实体
      * @return
      */
     @PutMapping("/{id}")

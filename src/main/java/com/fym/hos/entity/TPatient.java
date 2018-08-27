@@ -55,7 +55,7 @@ public class TPatient implements Serializable {
 	private String f5;
 
 	/**
-	 * 
+	 * 监护人
 	 */
 	private String guardian;
 

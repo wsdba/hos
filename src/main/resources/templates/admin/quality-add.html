@@ -82,13 +82,15 @@
         	/*   layer.alert(JSON.stringify(data.field), {
         	      title: '最终的提交信息'
         	    }) */
-        	    console.log(JSON.stringify(data.field))
         	     $.ajax({   
 				      type: "POST",   
 				      url: "/hos/quality/",   
 				      contentType: "application/json; charset=utf-8",
 				      data:JSON.stringify(data.field),
 				      success: function(data) {   
+				    	  layer.msg("添加成功！", {icon: 6, time: 500, anim: 4}, function () {
+				                parent.layer.close(parent.layer.getFrameIndex(window.name));
+				            });
 				      },   
 				      error: function(err) {   
 				      }   
