@@ -22,16 +22,25 @@ public class TPatient implements Serializable {
     @GeneratedValue(generator="idGenerator")
 	private String id;
 
+	/**
+	 * 归档时间
+	 */
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="archive_date")
 	private Date archiveDate;
-
+	/**
+	 * 床号
+	 */
 	@Column(name="bed_number")
 	private int bedNumber;
-
+	/**
+	 * 病区
+	 */
 	@Column(name="endemic_area")
 	private int endemicArea;
-
+	/*
+	 * 起来归档
+	 */
 	@Column(name="expect_archive")
 	private byte expectArchive;
 
@@ -45,49 +54,89 @@ public class TPatient implements Serializable {
 
 	private String f5;
 
+	/**
+	 * 
+	 */
 	private String guardian;
 
+	/**
+	 * 住院号
+	 */
 	@Column(name="h_number")
 	private BigInteger hNumber;
 
+	/**
+	 * 身份证号
+	 */
 	@Column(name="id_number")
 	private String idNumber;
 
+	/**
+	 * 入院日期
+	 */
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="in_hospital_date")
 	private Date inHospitalDate;
-
+	/**
+	 * 入院诊断
+	 */
 	@Column(name="in_hospital_diagnosis")
 	private String inHospitalDiagnosis;
 
+	/**
+	 * 出院日期
+	 */
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="out_hospital_date")
 	private Date outHospitalDate;
-
+	/**
+	 * 出院诊断
+	 */
 	@Column(name="out_hospital_diagnosis")
 	private String outHospitalDiagnosis;
 
+	/**
+	 * 质控时间
+	 */
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="quality_date")
 	private Date qualityDate;
 
+	/**
+	 * 入出相符
+	 */
 	@Column(name="sample_diagnosis")
 	private byte sampleDiagnosis;
 
+	/**
+	 * 年龄
+	 */
 	@Column(name="the_age")
 	private int theAge;
 
+	/**
+	 * 姓名
+	 */
 	@Column(name="the_name")
 	private String theName;
 
+	/**
+	 * 性别
+	 */
 	@Column(name="the_sex")
 	private String theSex;
 
+	/**
+	 * 质控人员
+	 */
 	//bi-directional many-to-one association to TQuality
 	@ManyToOne
 	@JoinColumn(name="quality_id")
 	private TQuality  quality;
 
+	/**
+	 * 医生
+	 */
 	//bi-directional many-to-one association to TDoctor
 	@ManyToOne
 	@JoinColumn(name="doctor_id")

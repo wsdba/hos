@@ -39,12 +39,21 @@ public class TQuality implements Serializable {
 	@Column(name = "the_age")
 	private int theAge;
 
+	/**
+	 * 描述
+	 */
 	@Column(name = "the_desc")
 	private String theDesc;
 
+	/**
+	 * 名称
+	 */
 	@Column(name = "the_name")
 	private String theName;
 
+	/**
+	 * 性别
+	 */
 	@Column(name = "the_sex")
 	private int theSex;
 

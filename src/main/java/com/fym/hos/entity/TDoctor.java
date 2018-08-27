@@ -22,6 +22,9 @@ public class TDoctor implements Serializable {
     @GeneratedValue(generator="idGenerator")
 	private String id;
 
+	/**
+	 * 部门
+	 */
 	private String department;
 
 	private String f1;
@@ -34,15 +37,27 @@ public class TDoctor implements Serializable {
 
 	private String f5;
 
+	/**
+	 * 年龄
+	 */
 	@Column(name="the_age")
 	private int theAge;
 
+	/**
+	 * 描述
+	 */
 	@Column(name="the_desc")
 	private String theDesc;
 
+	/**
+	 * 姓名
+	 */
 	@Column(name="the_name")
 	private String theName;
 
+	/**
+	 *性别
+	 */
 	@Column(name="the_sex")
 	private int theSex;
 
