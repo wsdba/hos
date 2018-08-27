@@ -90,13 +90,13 @@ public class QualityServiceImpl implements QualityService {
         List<TQuality> list = qualityRepository.findAll(new Specification<TQuality>() {
             @Override
             public Predicate toPredicate(Root<TQuality> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                Predicate predicate = cb.disjunction(); // 0=1
+                Predicate predicate = cb.conjunction(); // 0=1
                 // 添加查询条件
                 if (!StringUtils.isEmpty(theName)) {
                     predicate.getExpressions()
                             .add(cb.like(root.get("theName"), "%" + theName + "%"));
                 }
-                Predicate two = cb.disjunction();
+                Predicate two = cb.conjunction();
                 // 添加查询条件
                 if (!StringUtils.isEmpty(theName)) {
                     two.getExpressions()
