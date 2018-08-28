@@ -62,14 +62,11 @@ public class QualityController {
     @GetMapping("/")
 //    public GlobalResponse<TQualityDto> page(PageQueryDto<TQuality> page, String theName,@RequestParam(name="page") int cPage,@RequestParam(name="limit") int limit) {
     public Show page(PageQueryDto<TQuality> page, String theName,@RequestParam(name="page") int cPage,@RequestParam(name="limit") int limit) {
-    	page.setCurrentPage(cPage);
+    	page.setCurrentPage(cPage-1);
     	page.setPageSize(limit);
 //    	System.out.println(new GlobalResponse<TQualityDto>(qualityService.page(page, theName)).getPage().getData().get(1).getTheName());
-    	System.out.println(new GlobalResponse<TQualityDto>(qualityService.page(page, theName)).getPage());
     	Show show = new Show();
     	show.setData(new GlobalResponse<TQualityDto>(qualityService.page(page, theName)).getPage().getData());
-    	System.out.println(show.getData());
-    	System.out.println(show.getCode()+"="+show.getCount()+"="+show.getMsg()+"="+show.getCode()+"="+show.getData().size());
     	return show;
 //        return new GlobalResponse<TQualityDto>(qualityService.page(page, theName));
     }
@@ -111,7 +108,7 @@ public class QualityController {
     public GlobalResponse<TQualityDto> get(@PathVariable String id) {
         return new GlobalResponse<TQualityDto>(qualityService.get(id));
     }
-
+ 
     /**
      * 根据id更新数据
      *

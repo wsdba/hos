@@ -18,13 +18,13 @@
         <div class="layui-form-item ">
             <label class="layui-form-label">姓名</label>
 	            <div class="layui-input-block">
-	                <input type="text" name="name" placeholder="请输入质管姓名" autocomplete="off" class="layui-input" lay-verify="required"/>
+	                <input type="text" name="theName" placeholder="请输入医生姓名" autocomplete="off" class="layui-input" lay-verify="required"/>
 	            </div>
           </div>
           <div class="layui-form-item "> 
 		            <label class="layui-form-label">年龄</label>
 		            <div class="layui-input-block">
-		                <input type="text" name="age" placeholder="请输入年龄" autocomplete="off" class="layui-input" lay-verify="required"/>
+		                <input type="text" name="theAge" placeholder="请输入年龄" autocomplete="off" class="layui-input" lay-verify="required"/>
 		            </div>
            </div>
             
@@ -32,15 +32,15 @@
 	         <div class="layui-inline  ">
          	 <label class="layui-form-label">性别</label>
             <div class="layui-input-block">
-                <input type="radio" name="sex" value="0" title="男"/>
-                <input type="radio" name="sex" value="1" title="女" />
+                <input type="radio" id="man" name="theSex"  value="0" title="男"/>
+                <input type="radio" id="woman" name="theSex" value="1" title="女" />
             </div>
             </div>
         </div>
          <div class=" layui-form-text">
             <label class="layui-form-label">备注</label>
             <div class="layui-input-block">
-                <textarea name="remarks" placeholder="请输入内容" class="layui-textarea"></textarea>
+                <textarea name="theDesc" placeholder="请输入内容" class="layui-textarea"></textarea>
             </div>
             </div>
         <div class="layui-form-item">
@@ -49,6 +49,7 @@
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
+        <input type="hidden" name="id" value=""></input>
       </form>
    </div>
 <!--js逻辑-->
@@ -78,13 +79,95 @@
             type: "datetime"
         });
         form.on('submit(add)', function (data) {
-            console.log(data.field);
-            layer.msg("添加成功！", {icon: 6, time: 1000, anim: 4}, function () {
-                parent.layer.close(parent.layer.getFrameIndex(window.name));
-            });
-            return false;
+        	/**
+			判断是更新还是保存
+		*/
+		var editId = parent.editId;
+		if(editId!=""){
+			 $.ajax({   
+			      type: "PUT",   
+			      url: "/hos/doctor/"+editId,   
+			      contentType: "application/json; charset=utf-8",
+			      data:JSON.stringify(data.field),
+			      success: function(data) {   
+			    	  layer.msg("添加成功！", {icon: 6, time: 500, anim: 4}, function () {
+			                parent.layer.close(parent.layer.getFrameIndex(window.name));
+			            });
+			      },   
+			      error: function(err) {   
+			      }   
+			    });  
+			
+			
+		}else{
+			 $.ajax({   
+			      type: "POST",   
+			      url: "/hos/doctor/",   
+			      contentType: "application/json; charset=utf-8",
+			      data:JSON.stringify(data.field),
+			      success: function(data) {   
+			    	  layer.msg("添加成功！", {icon: 6, time: 500, anim: 4}, function () {
+			                parent.layer.close(parent.layer.getFrameIndex(window.name));
+			            });
+			      },   
+			      error: function(err) {   
+			      }   
+			    });  
+			
+		}
+        return false;
         });
     })
+</script>
+
+<script type="text/javascript">
+/**
+ * 表格数据填充
+ */
+window.onload=function(){
+	console.log(parent.editId)
+	var eid = parent.editId;
+	var idInput = document.getElementsByName("id")[0];
+	idInput.value=eid;
+	if(eid!=""){
+		
+		   layui.use(['element', 'table', 'form', 'jquery', 'laydate'], function () {
+		        var element = layui.element;
+		        var form = layui.form;
+		        var $ = layui.jquery;
+		        
+		        $.ajax({   
+				      type: "GET",   
+				      url: "/hos/doctor/"+eid,   
+				      contentType: "application/json; charset=utf-8",
+				      data:JSON.stringify(eid),//将json对象转换成json字符串发送
+			          dataType:"json",
+				      success: function(data) {   
+				    	  if(data.object.theSex==1){
+				    		  $("#man").attr("checked","checked");
+				    	  }else{
+							  $("#woman").attr("checked","checked");				    		  
+				    	  }
+				    	  form.render('radio');
+//				    	  if(data.object.theSex=)
+				    	  form.val("formLay", {
+					            "theName": data.object.theName // "name": "value"
+					            ,"theSex": data.object.theSex
+					            ,"theAge": data.object.theAge
+					            ,"check[write]": true
+					            ,"open": false
+					            ,"theDesc": data.object.theDesc
+					        });
+				      },   
+				      error: function(err) {   
+				      }   
+				    });   
+		        
+		        
+		      
+		   });
+	}
+}
 </script>
 </body>
 </html>

@@ -37,6 +37,8 @@ public class TQualityDto {
 	private String theName;
 
 	private int theSex;
+	
+	private String theSexText;
 
 	public TQualityDto() {
 	}
@@ -119,6 +121,17 @@ public class TQualityDto {
 
 	public void setTheSex(int theSex) {
 		this.theSex = theSex;
+	}
+
+	public String getTheSexText() {
+		if(theSex==1)
+		return "男";
+		else
+			return "女";
+	}
+
+	public void setTheSexText(String theSexText) {
+		this.theSexText = theSexText;
 	}
 
 }

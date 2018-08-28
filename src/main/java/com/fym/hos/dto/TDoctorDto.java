@@ -36,6 +36,8 @@ public class TDoctorDto  {
 
 	private int theSex;
 
+	private String theSexText;
+	
 	public TDoctorDto() {
 	}
 
@@ -125,6 +127,17 @@ public class TDoctorDto  {
 
 	public void setTheSex(int theSex) {
 		this.theSex = theSex;
+	}
+
+	public String getTheSexText() {
+		if(theSex==0)
+			return "女";
+		else
+			return "男";
+	}
+
+	public void setTheSexText(String theSexText) {
+		this.theSexText = theSexText;
 	}
 
  

@@ -17,7 +17,7 @@
     <div class="layui-row">
         <form class="layui-form layui-col-md12 ok-search">
          	<label class="layui-form-label"> 质控编号：</label>
-          		<input class="layui-input" placeholder="住院号" autocomplete="off" id="hNumber"/>
+          		<input class="layui-input" placeholder="质控编号" autocomplete="off" id="hNumber"/>
             <label class="layui-form-label">   质控姓名 ：</label>
             	<input class="layui-input" placeholder="姓名" autocomplete="off" id="name"/>
            <!--  <input class="layui-input" placeholder="请输入用户名" autocomplete="off"/> -->
@@ -59,6 +59,7 @@
     <a href="javascript:;" title="删除" lay-event="del"><i class="layui-icon">&#xe640;</i></a>
 </script>
 <script>
+var editId ;
     NProgress.start();
     window.onload = function () {
         NProgress.done();
@@ -90,8 +91,8 @@
                 {field: 'id', title: 'ID', width: "15%", sort: true},
                 {field: 'theName', title: '姓名', width: "15%"},
                 {field: 'theAge', title: '年龄', width: "15%"},
-                {field: 'theSex', title: '性别', width: "5%", templet: '#statusTpl'},
-                {field: 'theDesc', title: '描述', width: "40%", templet: '#roleTpl'},
+                {field: 'theSexText', title: '性别', width: "7%"},
+                {field: 'theDesc', title: '描述', width: "40%"},
                 {title: '操作', width: "10%", templet: '#operationTpl', align: 'center'}
             ]],
             done: function (res, curr, count) {
@@ -100,7 +101,27 @@
         });
 
         form.on('submit(search)', function () {
+        	
             layer.msg('正在查询，请稍后...');
+        	table.render({
+                elem: '#tableId',
+                url: '/hos/quality/',
+                limit: 10,
+                page: true,
+                cols: [[
+                    {type: 'checkbox'},
+                    {field: 'id', title: 'ID', width: "15%", sort: true},
+                    {field: 'theName', title: '姓名', width: "15%"},
+                    {field: 'theAge', title: '年龄', width: "15%"},
+                    {field: 'theSexText', title: '性别', width: "7%"},
+                    {field: 'theDesc', title: '描述', width: "40%"},
+                    {title: '操作', width: "10%", templet: '#operationTpl', align: 'center'}
+                ]],
+                done: function (res, curr, count) {
+                    $("#countNum").text(count);
+                }
+            });
+            
             return false;
         });
 
@@ -138,22 +159,6 @@
                         idsStr += checkStatus.data[i].id + ',';
                     }
                     console.log("选择的id-->" + idsStr);
-                    
-                    $.ajax({   
-  				      type: "POST",   
-  				      url: "/hos/quality/removeMulti?ids="+idsStr,   
-  				      contentType: "application/json; charset=utf-8",
-  				      success: function(data) {   
-  				    	  layer.msg("添加成功！", {icon: 6, time: 500, anim: 4}, function () {
-  				                parent.layer.close(parent.layer.getFrameIndex(window.name));
-  				            });
-  				      },   
-  				      error: function(err) {   
-  				      }   
-  				    });   
-                    
-                    
-                    
                 /*     layer.msg("操作成功！", {icon: 1, time: 1000}, function () {
                         $(".layui-laypage-btn")[0].click();
                     }); */
@@ -173,6 +178,7 @@
         		layer.msg('只能选择一条数据', {icon: 5});
         		return;
         	}
+        	editId = d[0].id;
         	layer.open({
                 title: '修改质控人员',
                 type: 2,
@@ -180,7 +186,7 @@
                 maxmin: true,
                 shade: 0.5,
                 anim: 4,
-                area: ['35%', '53%'],
+                area: ['35%','53%'],
                 content: 'to?page=admin/quality-add',
                 zIndex: layer.zIndex,
                 // skin: 'layui-layer-molv',
@@ -225,10 +231,25 @@
                         idsStr += checkStatus.data[i].id + ',';
                     }
                     console.log("选择的id-->" + idsStr);
-                    
-                    layer.msg("操作成功！", {icon: 1, time: 1000}, function () {
-                        $(".layui-laypage-btn")[0].click();
-                    });
+                    $.ajax({   
+    				      type: "DELETE",   
+    				      url: "/hos/quality/removeMulti?ids="+idsStr,   
+    				      contentType: "application/json; charset=utf-8",
+    				     data:JSON.stringify(idsStr),//将json对象转换成json字符串发送
+    			         dataType:"json",
+    				      success: function(data) {   
+    				    	/*   layer.msg("添加成功！", {icon: 6, time: 500, anim: 4}, function () {
+    				                parent.layer.close(parent.layer.getFrameIndex(window.name));
+    				            }); */
+    				    	  $(".layui-laypage-btn")[0].click();
+    				    	  layer.msg("操作成功！", {icon: 1, time: 1300}, function () {
+    		                      
+    		                    });
+    				      },   
+    				      error: function(err) {   
+    				      }   
+    				    });   
+                  
                 } else {
                     layer.msg('未选择有效数据', {
                         offset: 't',
@@ -239,6 +260,8 @@
         })
 /*]]>*/
         $("#addUser").click(function () {
+        	editId ="";
+        	console.log(editId)
             layer.open({
                 title: '添加质控人员',
                 type: 2,

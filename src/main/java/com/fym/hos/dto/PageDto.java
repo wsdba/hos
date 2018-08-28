@@ -1,5 +1,7 @@
 package com.fym.hos.dto;
 
+import static org.mockito.Matchers.intThat;
+
 import java.util.List;
 
 public class PageDto<T> {
@@ -16,6 +18,7 @@ public class PageDto<T> {
 		this.totalPage = totalPage;
 		this.pageSize = pageSize;
 		this.data = data;
+		
 	}
 
 	public int getCurrentPage() {
