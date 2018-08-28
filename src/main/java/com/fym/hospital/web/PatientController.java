@@ -22,7 +22,7 @@ public class PatientController {
     /**
      * 保存
      *
-     * @param tPatient
+     * @param tPatient     病例实体
      * @return
      */
     @PostMapping("/")
@@ -48,8 +48,8 @@ public class PatientController {
     /**
      * 分页
      *
-     * @param page
-     * @param theName
+     * @param page         分页条件
+     * @param theName      模糊查询条件
      * @return
      */
     @GetMapping("/")
@@ -61,7 +61,7 @@ public class PatientController {
     /**
      * 查询所有
      *
-     * @param theName
+     * @param theName      模糊查询条件 （可根据名称或描述）
      * @return
      */
     @GetMapping("/findAll")
@@ -73,8 +73,8 @@ public class PatientController {
     /**
      * 提供给app的分页查询
      *
-     * @param page
-     * @param theName
+     * @param page  分页条件
+     * @param theName 模糊查询条件
      * @return
      */
     @GetMapping("/pageByApp")
@@ -113,7 +113,7 @@ public class PatientController {
      * 根据id更新数据
      *
      * @param id
-     * @param tPatient
+     * @param tPatient     病例实体
      * @return
      */
     @PutMapping("/{id}")

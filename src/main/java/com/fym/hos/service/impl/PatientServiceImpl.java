@@ -31,7 +31,9 @@ public class PatientServiceImpl implements PatientService {
   // wo gen ni 我跟你讲一下代码， 有问题，QQ发我
     @Autowired
     private PatientRepository patientRepository;
-
+    /**
+	 * 保存方法
+	 */
     @Override
     @Transactional
 	public TPatientDto save(TPatient tPatient) {
@@ -39,13 +41,17 @@ public class PatientServiceImpl implements PatientService {
         return BeanMapperUtils.map(tPatient,TPatientDto.class);
     }
  
-
+    /**
+	 * 单条删除
+	 */
     @Override
     @Transactional
     public void delete(String id) {
     	patientRepository.delete(id); //根据id删除数据
     }
-
+    /**
+	 * 多条删除
+	 */
     @Override
     @Transactional
     public void removeMulti(String ids) {
@@ -54,7 +60,9 @@ public class PatientServiceImpl implements PatientService {
         	patientRepository.delete(id[i]);
         }
     }
-
+    /**
+	 *  分页查询，并模糊查询theName(姓名）,也可以不需要条件
+	 */
     @Override
     @Transactional(readOnly = true)
     public PageDto<TPatientDto> page(PageQueryDto<TPatient> page, String theName) {
@@ -73,14 +81,18 @@ public class PatientServiceImpl implements PatientService {
         return new PageDto<TPatientDto>(findAll.getNumber(), findAll.getTotalPages(), findAll.getSize(),
                 BeanMapperUtils.mapList(findAll.getContent(), TPatient.class, TPatientDto.class)); 
     }
-
+    /**
+	 * 根据Id 获取病例实体，返回病例DTO
+	 */
     @Override
     @Transactional(readOnly = true)	
     public TPatientDto get(String id) { 
         TPatient TPatient = patientRepository.getOne(id);
         return BeanMapperUtils.map(TPatient,TPatientDto.class);
     }
-
+    /**
+	 * 根据姓名，描述 来查询，返回一个病例dto LIST，（用于手机app上面）
+	 */
     @Override
     @Transactional(readOnly = true)
     public List<TPatientDto> findAll(String theName) {
@@ -115,7 +127,9 @@ public class PatientServiceImpl implements PatientService {
         // 一定要进行映射，否则会进行懒加载数据，导致查询数据缓慢（集合映射）将集合映射为TDoctorDto 集合
         return BeanMapperUtils.mapList(list, TPatient.class, TPatientDto.class);
     }
-
+    /**
+	 * 分页查询，并模糊查询theName(姓名）
+	 */
     @Override
     @Transactional(readOnly = true)
     public PageDto<TPatientDto> pageByApp(PageQueryDto<TPatient> page, String theName) {// 你看下这个 看懂了吗感觉差不多。。对得，后期我们做平台要封装得

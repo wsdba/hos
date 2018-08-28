@@ -82,21 +82,17 @@
 
         table.render({
             elem: '#tableId',
-            url: '/../data/user.json',
+            url: '/hos/quality/',
             limit: 10,
             page: true,
             cols: [[
                 {type: 'checkbox'},
-                {field: 'id', title: 'ID', width: 80, sort: true},
-                {field: 'username', title: '用户名', width: 100},
-                {field: 'name', title: '姓名', width: 100},
-                {field: 'password', title: '密码', width: 100},
-                {field: 'status', title: '状态', width: 85, templet: '#statusTpl'},
-                {field: 'role', title: '角色', width: 100, templet: '#roleTpl'},
-                {field: 'email', title: '邮箱', width: 200},
-                {field: 'createTime', title: '创建时间', width: 200},
-                {field: 'logins', title: '登陆次数', width: 100},
-                {title: '操作', width: 200, templet: '#operationTpl', align: 'center'}
+                {field: 'id', title: 'ID', width: "15%", sort: true},
+                {field: 'theName', title: '姓名', width: "15%"},
+                {field: 'theAge', title: '年龄', width: "15%"},
+                {field: 'theSex', title: '性别', width: "5%", templet: '#statusTpl'},
+                {field: 'theDesc', title: '描述', width: "40%", templet: '#roleTpl'},
+                {title: '操作', width: "10%", templet: '#operationTpl', align: 'center'}
             ]],
             done: function (res, curr, count) {
                 $("#countNum").text(count);

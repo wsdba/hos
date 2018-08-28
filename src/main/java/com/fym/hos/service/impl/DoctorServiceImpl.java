@@ -26,10 +26,14 @@ import com.fym.utils.BeanMapperUtils;
 
 @Service
 public class DoctorServiceImpl implements DoctorService {
-  // wo gen ni 我跟你讲一下代码， 有问题，QQ发我
     @Autowired
     private DoctorRepository doctorRepository;
 
+    /**
+	 * 保存方法
+	 * @param tpatient 病例实体
+	 * @return
+	 */
     @Override
     @Transactional
 	public TDoctorDto save(TDoctor tDoctor) {
@@ -39,14 +43,19 @@ public class DoctorServiceImpl implements DoctorService {
     	// 为什么这么做，前面说了，用DTO是为了什么 明白？明白。。
         return BeanMapperUtils.map(tDoctor,TDoctorDto.class);
     }
- 
-
+    /**
+	 * 单条删除
+	 * @param id  病例ID
+	 */
     @Override
     @Transactional
     public void delete(String id) {
         doctorRepository.delete(id); //根据id删除数据
     }
-
+    /**
+	 * 多条删除
+	 * @param ids 删除的多条医生IDS
+	 */
     @Override
     @Transactional
     public void removeMulti(String ids) {
@@ -56,6 +65,12 @@ public class DoctorServiceImpl implements DoctorService {
         }
     }
 
+    /**
+	 * 分页查询，并模糊查询theName(姓名）,也可以不需要条件
+	 * @param page 分页条件
+	 * @param theName  查询条件
+	 * @return
+	 */
     @Override
     @Transactional(readOnly = true)
     public PageDto<TDoctorDto> page(PageQueryDto<TDoctor> page, String theName) {
@@ -87,14 +102,22 @@ public class DoctorServiceImpl implements DoctorService {
         return new PageDto<TDoctorDto>(findAll.getNumber(), findAll.getTotalPages(), findAll.getSize(),
                 BeanMapperUtils.mapList(findAll.getContent(), TDoctor.class, TDoctorDto.class)); 
     }
-
+    /**
+	 * 根据Id 获取医生实体，返回医生DTO
+	 * @param id
+	 * @return
+	 */
     @Override
     @Transactional(readOnly = true)	
     public TDoctorDto get(String id) { 
         TDoctor TDoctor = doctorRepository.getOne(id);
         return BeanMapperUtils.map(TDoctor,TDoctorDto.class);
     }
-
+    /**
+	 * 根据姓名，描述 来查询，返回一个医生dto LIST，（用于手机app上面）
+	 * @param theName 查询的条件，可以是名称也可以是描述
+	 * @return
+	 */
     @Override
     @Transactional(readOnly = true)
     public List<TDoctorDto> findAll(String theName) {
@@ -124,7 +147,12 @@ public class DoctorServiceImpl implements DoctorService {
         // 一定要进行映射，否则会进行懒加载数据，导致查询数据缓慢（集合映射）将集合映射为TDoctorDto 集合
         return BeanMapperUtils.mapList(list, TDoctor.class, TDoctorDto.class);
     }
-
+    /**
+	 * 分页查询，并模糊查询theName(姓名）
+	 * @param page 分页条件
+	 * @param theName  模糊查询的条件
+	 * @return
+	 */
     @Override
     @Transactional(readOnly = true)
     public PageDto<TDoctorDto> pageByApp(PageQueryDto<TDoctor> page, String theName) {// 你看下这个 看懂了吗感觉差不多。。对得，后期我们做平台要封装得
