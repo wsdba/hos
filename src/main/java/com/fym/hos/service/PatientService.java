@@ -1,5 +1,6 @@
 package com.fym.hos.service;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import com.fym.hos.dto.PageDto;
@@ -50,4 +51,10 @@ public interface PatientService {
 	 * @return
 	 */
 	PageDto<TPatientDto> pageByApp(PageQueryDto<TPatient> page, String theName);
+	/**
+	 * 校验住院号是否唯一
+	 * @param hNumber 住院号
+	 * @return
+	 */
+	boolean validTheHNumber(BigInteger hNumber);
 }

@@ -12,6 +12,8 @@
  
 
 # 4.API
+ - 进入后台
+ http://localhost:8080/hos/common/
  - 4.1 质控人员管理
  - web 
                增：/hos/quality/                     参数：TQuality                     METHOD : POST       

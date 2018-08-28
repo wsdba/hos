@@ -53,4 +53,6 @@ public interface QualityService {
 	 * @return
 	 */
 	PageDto<TQualityDto> pageByApp(PageQueryDto<TQuality> page,String theName);
+
+
 }

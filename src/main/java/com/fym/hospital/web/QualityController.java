@@ -99,6 +99,8 @@ public class QualityController {
         return new GlobalResponse<TQualityDto>(qualityService.pageByApp(page, theName));
     }
 
+
+
     /**
      * 根据id获取数据
      *

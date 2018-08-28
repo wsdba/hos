@@ -1,5 +1,6 @@
 package com.fym.hos.service.impl;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -7,6 +8,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import com.fym.hos.entity.TQuality;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,6 +24,7 @@ import com.fym.hos.dto.TPatientDto;
 import com.fym.hos.entity.TPatient;
 import com.fym.hos.service.PatientService;
 import com.fym.utils.BeanMapperUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Service
 public class PatientServiceImpl implements PatientService {
@@ -98,18 +101,25 @@ public class PatientServiceImpl implements PatientService {
         	
             @Override
             public Predicate toPredicate(Root<TPatient> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-            	Predicate predicate = cb.disjunction(); // 0=1  这个代表 where 0=1 不成立得一个条目
+            	Predicate predicate = cb.conjunction(); // 0=1  这个代表 where 0=1 不成立得一个条目
                 // 添加查询条件
                 if (!StringUtils.isEmpty(theName)) {
                     predicate.getExpressions() // 添加条件
                             .add(cb.like(root.get("theName"), "%" + theName + "%"));
                 }
-                Predicate two = cb.disjunction(); // 0=1  这个代表 where 0=1 不成立得一个条目 
-                // 添加查询条件
-                if (!StringUtils.isEmpty(theName)) {
-                    two.getExpressions() // 添加条件
-                            .add(cb.like(root.get("theDesc"), "%" + theName + "%"));
+                Predicate two = cb.disjunction(); // 0=1  这个代表 where 0=1 不成立得一个条目
+
+                try{
+                    // 添加查询条件
+                    if (!StringUtils.isEmpty(theName)) {
+                        two.getExpressions() // 添加条件
+                                .add(cb.equal(root.get("hNumber") , theName  ));
+                    }
+                }catch(Exception e){
+
                 }
+
+
                 return cb.or(predicate, two); // or条件拼接 where theName like  or theDesc like  不懂可以测试看SQL
             }
         });
@@ -142,4 +152,13 @@ public class PatientServiceImpl implements PatientService {
                 BeanMapperUtils.mapList(findAll.getContent(), TPatient.class, TPatientDto.class));
     }
 
+
+    @Override
+    @Transactional(readOnly = true)
+    public boolean validTheHNumber(BigInteger hNumber) {
+        TPatient patient = patientRepository.findByHNumber(hNumber);
+        if (patient == null)
+            return true;
+        else return false;
+    }
 }

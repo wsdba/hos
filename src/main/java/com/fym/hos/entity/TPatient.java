@@ -10,8 +10,9 @@ import java.math.BigInteger;
 
 
 /**
- * The persistent class for the t_patient database table.
- * 
+ * 病案类
+ * @author  fym
+ * @since  2018-08-27
  */
 @Entity
 @Table(name="t_patient")
@@ -32,17 +33,17 @@ public class TPatient implements Serializable {
 	 * 床号
 	 */
 	@Column(name="bed_number")
-	private int bedNumber;
+	private String bedNumber;
 	/**
 	 * 病区
 	 */
 	@Column(name="endemic_area")
 	private int endemicArea;
-	/*
-	 * 起来归档
+	/**
+	 * 期内归档
 	 */
 	@Column(name="expect_archive")
-	private byte expectArchive;
+	private int expectArchive;
 
 	private String f1;
 
@@ -106,7 +107,7 @@ public class TPatient implements Serializable {
 	 * 入出相符
 	 */
 	@Column(name="sample_diagnosis")
-	private byte sampleDiagnosis;
+	private int sampleDiagnosis;
 
 	/**
 	 * 年龄
@@ -161,11 +162,11 @@ public class TPatient implements Serializable {
 		this.archiveDate = archiveDate;
 	}
 
-	public int getBedNumber() {
-		return this.bedNumber;
+	public String getBedNumber() {
+		return bedNumber;
 	}
 
-	public void setBedNumber(int bedNumber) {
+	public void setBedNumber(String bedNumber) {
 		this.bedNumber = bedNumber;
 	}
 
@@ -177,13 +178,6 @@ public class TPatient implements Serializable {
 		this.endemicArea = endemicArea;
 	}
 
-	public byte getExpectArchive() {
-		return this.expectArchive;
-	}
-
-	public void setExpectArchive(byte expectArchive) {
-		this.expectArchive = expectArchive;
-	}
 
 	public String getF1() {
 		return this.f1;
@@ -289,13 +283,7 @@ public class TPatient implements Serializable {
 		this.qualityDate = qualityDate;
 	}
 
-	public byte getSampleDiagnosis() {
-		return this.sampleDiagnosis;
-	}
 
-	public void setSampleDiagnosis(byte sampleDiagnosis) {
-		this.sampleDiagnosis = sampleDiagnosis;
-	}
 
 	public int getTheAge() {
 		return this.theAge;
@@ -343,5 +331,21 @@ public class TPatient implements Serializable {
 
 	public void setDoctor(TDoctor doctor) {
 		this.doctor = doctor;
+	}
+
+	public int getExpectArchive() {
+		return expectArchive;
+	}
+
+	public void setExpectArchive(int expectArchive) {
+		this.expectArchive = expectArchive;
+	}
+
+	public int getSampleDiagnosis() {
+		return sampleDiagnosis;
+	}
+
+	public void setSampleDiagnosis(int sampleDiagnosis) {
+		this.sampleDiagnosis = sampleDiagnosis;
 	}
 }

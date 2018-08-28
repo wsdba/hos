@@ -9,5 +9,4 @@ import com.fym.hos.entity.TQuality;
 @Repository
 public interface QualityRepository  extends JpaRepository<TQuality,String>,PagingAndSortingRepository<TQuality,String>,JpaSpecificationExecutor<TQuality>{
 
-	
 }
