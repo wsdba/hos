@@ -105,13 +105,13 @@ public class DoctorServiceImpl implements DoctorService {
             @Override
             public Predicate toPredicate(Root<TDoctor> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                // 这个跟上面不一样，这个是提供给手机使用，手机只有一个输入框，但是却可以查两类，
-            	Predicate predicate = cb.disjunction(); // 0=1  这个代表 where 0=1 不成立得一个条目
+            	Predicate predicate = cb.conjunction(); // 0=1  这个代表 where 0=1 不成立得一个条目
                 // 添加查询条件
                 if (!StringUtils.isEmpty(theName)) {
                     predicate.getExpressions() // 添加条件
                             .add(cb.like(root.get("theName"), "%" + theName + "%"));
                 }
-                Predicate two = cb.disjunction(); // 0=1  这个代表 where 0=1 不成立得一个条目 
+                Predicate two = cb.conjunction(); // 0=1  这个代表 where 0=1 不成立得一个条目
                 // 添加查询条件
                 if (!StringUtils.isEmpty(theName)) {
                     two.getExpressions() // 添加条件

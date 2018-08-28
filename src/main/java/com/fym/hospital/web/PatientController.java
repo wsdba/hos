@@ -8,6 +8,8 @@ import com.fym.hos.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigInteger;
+
 @RestController
 @RequestMapping("/hos/patient")
 public class PatientController {
@@ -20,13 +22,14 @@ public class PatientController {
     /**
      * 保存
      *
-     * @param tQuality
+     * @param tPatient
      * @return
      */
     @PostMapping("/")
-    public GlobalResponse<TPatient> add(@RequestBody TPatient tPatient) {
-    	patientService.save(tPatient);
-        return new GlobalResponse<TPatient>(0, "保存成功");
+    @CrossOrigin
+    public GlobalResponse<TPatientDto> add(@RequestBody TPatient tPatient) {
+        TPatientDto tPatientDto = patientService.save(tPatient);
+        return new GlobalResponse<TPatientDto>(tPatientDto);
     }
 
 
@@ -80,6 +83,22 @@ public class PatientController {
     }
 
     /**
+     * 提供给app的住院号校验
+     *
+     * @param hNumber 住院号
+     * @return
+     */
+    @GetMapping("/validTheHNumber")
+    public GlobalResponse<TPatientDto> validTheHNumber(BigInteger hNumber) {
+        boolean flag  = patientService.validTheHNumber(hNumber);
+        if(flag){
+            return new GlobalResponse<TPatientDto>(-1,"唯一，不重复");
+        }else{
+            return new GlobalResponse<TPatientDto>(0,"重复");
+        }
+    }
+
+    /**
      * 根据id获取数据
      *
      * @param id
@@ -94,10 +113,11 @@ public class PatientController {
      * 根据id更新数据
      *
      * @param id
-     * @param tQuality
+     * @param tPatient
      * @return
      */
     @PutMapping("/{id}")
+    @CrossOrigin
     public GlobalResponse<TPatient> update(@PathVariable String id, @RequestBody TPatient tPatient) {
     	patientService.save(tPatient);
         return new GlobalResponse<TPatient>(0, "更新成功");

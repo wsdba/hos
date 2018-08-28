@@ -39,4 +39,6 @@ public interface QualityService {
 	 * 分页查询，并模糊查询theName(姓名）
 	 */
 	PageDto<TQualityDto> pageByApp(PageQueryDto<TQuality> page,String theName);
+
+
 }

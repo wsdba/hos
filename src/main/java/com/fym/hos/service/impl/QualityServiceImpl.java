@@ -33,7 +33,7 @@ public class QualityServiceImpl implements QualityService {
     @Transactional
     public TQualityDto save(TQuality tQuality) {
         tQuality = qualityRepository.saveAndFlush(tQuality);
-        return BeanMapperUtils.map(tQuality,TQualityDto.class);
+        return BeanMapperUtils.map(tQuality, TQualityDto.class);
     }
 
     @Override
@@ -79,7 +79,7 @@ public class QualityServiceImpl implements QualityService {
     @Transactional(readOnly = true)
     public TQualityDto get(String id) {
         TQuality tQuality = qualityRepository.getOne(id);
-        return BeanMapperUtils.map(tQuality,TQualityDto.class);
+        return BeanMapperUtils.map(tQuality, TQualityDto.class);
     }
 
     @Override
@@ -129,5 +129,6 @@ public class QualityServiceImpl implements QualityService {
         return new PageDto<TQualityDto>(findAll.getNumber(), findAll.getTotalPages(), findAll.getSize(),
                 BeanMapperUtils.mapList(findAll.getContent(), TQuality.class, TQualityDto.class));
     }
+
 
 }
