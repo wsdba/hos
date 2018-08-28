@@ -80,7 +80,6 @@ public class QualityServiceImpl implements QualityService {
             @Override
             public Predicate toPredicate(Root<TQuality> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
             	
-            	System.out.println("-----------------");
                 Predicate p1 = cb.conjunction(); // 0=1
                 // 添加查询条件
                 if (!StringUtils.isEmpty(theName)) {
@@ -91,6 +90,10 @@ public class QualityServiceImpl implements QualityService {
         };
         
         Page<TQuality> findAll = qualityRepository.findAll(spec, pageable);
+//        System.out.println(findAll.getNumber());
+//        System.out.println(findAll.getTotalPages());
+//        System.out.println(findAll.getSize());
+//        System.out.println(findAll.getContent());
         return new PageDto<TQualityDto>(findAll.getNumber(), findAll.getTotalPages(), findAll.getSize(),
                 BeanMapperUtils.mapList(findAll.getContent(), TQuality.class, TQualityDto.class));
     }

@@ -138,9 +138,25 @@
                         idsStr += checkStatus.data[i].id + ',';
                     }
                     console.log("选择的id-->" + idsStr);
-                    layer.msg("操作成功！", {icon: 1, time: 1000}, function () {
+                    
+                    $.ajax({   
+  				      type: "POST",   
+  				      url: "/hos/quality/removeMulti?ids="+idsStr,   
+  				      contentType: "application/json; charset=utf-8",
+  				      success: function(data) {   
+  				    	  layer.msg("添加成功！", {icon: 6, time: 500, anim: 4}, function () {
+  				                parent.layer.close(parent.layer.getFrameIndex(window.name));
+  				            });
+  				      },   
+  				      error: function(err) {   
+  				      }   
+  				    });   
+                    
+                    
+                    
+                /*     layer.msg("操作成功！", {icon: 1, time: 1000}, function () {
                         $(".layui-laypage-btn")[0].click();
-                    });
+                    }); */
                 } else {
                     layer.msg('未选择有效数据', {
                         offset: 't',
@@ -209,6 +225,7 @@
                         idsStr += checkStatus.data[i].id + ',';
                     }
                     console.log("选择的id-->" + idsStr);
+                    
                     layer.msg("操作成功！", {icon: 1, time: 1000}, function () {
                         $(".layui-laypage-btn")[0].click();
                     });

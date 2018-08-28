@@ -64,11 +64,12 @@ public class QualityController {
     public Show page(PageQueryDto<TQuality> page, String theName,@RequestParam(name="page") int cPage,@RequestParam(name="limit") int limit) {
     	page.setCurrentPage(cPage);
     	page.setPageSize(limit);
-    	System.out.println("===1");
-    	System.out.println(new GlobalResponse<TQualityDto>(qualityService.page(page, theName)).getPage().getData().get(1).getTheName());
+//    	System.out.println(new GlobalResponse<TQualityDto>(qualityService.page(page, theName)).getPage().getData().get(1).getTheName());
+    	System.out.println(new GlobalResponse<TQualityDto>(qualityService.page(page, theName)).getPage());
     	Show show = new Show();
     	show.setData(new GlobalResponse<TQualityDto>(qualityService.page(page, theName)).getPage().getData());
-    	System.out.println(show.getCode()+"="+show.getCount()+"="+show.getMsg()+"="+show.getCode()+"="+show.getData());
+    	System.out.println(show.getData());
+    	System.out.println(show.getCode()+"="+show.getCount()+"="+show.getMsg()+"="+show.getCode()+"="+show.getData().size());
     	return show;
 //        return new GlobalResponse<TQualityDto>(qualityService.page(page, theName));
     }
@@ -130,7 +131,8 @@ public class QualityController {
      * @return
      */
     @DeleteMapping("/removeMulti")
-    public GlobalResponse<TQuality> removeMulti(String ids) {
+    public GlobalResponse<TQuality> removeMulti(@RequestParam(name="ids") String ids) {
+    	System.out.println("===");
         qualityService.removeMulti(ids);
         return new GlobalResponse<TQuality>(0, "删除成功");
     }
