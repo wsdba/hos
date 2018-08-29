@@ -85,6 +85,7 @@
 			/**
 				判断是更新还是保存
 			*/
+			console.log(data)
 			var editId = parent.editId;
 			if(editId!=""){
 				 $.ajax({   
@@ -103,6 +104,7 @@
 				
 				
 			}else{
+				console.log(data.field)
 				 $.ajax({   
 				      type: "POST",   
 				      url: "/hos/quality/",   

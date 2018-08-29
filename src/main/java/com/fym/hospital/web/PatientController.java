@@ -2,13 +2,17 @@ package com.fym.hospital.web;
 
 import com.fym.hos.dto.GlobalResponse;
 import com.fym.hos.dto.PageQueryDto;
+import com.fym.hos.dto.Show;
 import com.fym.hos.dto.TPatientDto;
 import com.fym.hos.entity.TPatient;
+import com.fym.hos.entity.TQuality;
 import com.fym.hos.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/hos/patient")
@@ -26,10 +30,11 @@ public class PatientController {
      * @return
      */
     @PostMapping("/")
-    @CrossOrigin
-    public GlobalResponse<TPatientDto> add(@RequestBody TPatient tPatient) {
-        TPatientDto tPatientDto = patientService.save(tPatient);
-        return new GlobalResponse<TPatientDto>(tPatientDto);
+    public GlobalResponse<TPatient> add(@RequestBody TPatient tPatient) {
+        /*TPatientDto tPatientDto = patientService.save(tPatient);
+        return new GlobalResponse<TPatientDto>(tPatientDto);*/
+    	patientService.save(tPatient);
+          return new GlobalResponse<TPatient>(0, "保存成功");
     }
 
 
@@ -53,9 +58,17 @@ public class PatientController {
      * @return
      */
     @GetMapping("/")
-    public GlobalResponse<TPatientDto> page(PageQueryDto<TPatient> page, String theName) {
-        return new GlobalResponse<TPatientDto>(patientService.page(page, theName));
-    }
+    public Show page(PageQueryDto<TPatient> page, String theName,@RequestParam(name="page") int cPage,@RequestParam(name="limit") int limit) {
+     	page.setCurrentPage(cPage-1);
+    	page.setPageSize(limit);
+//    	System.out.println(new GlobalResponse<TQualityDto>(qualityService.page(page, theName)).getPage().getData().get(1).getTheName());
+    	Show show = new Show();
+    	List<TPatientDto> tq = new ArrayList<TPatientDto>();
+    	tq = new GlobalResponse<TPatientDto>(patientService.page(page, theName)).getPage().getData();
+    	show.setCount(tq.size());
+    	show.setData(tq);
+    	return show;
+    	}
 
 
     /**

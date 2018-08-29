@@ -2,9 +2,15 @@ package com.fym.hospital.web;
 
 import com.fym.hos.dto.GlobalResponse;
 import com.fym.hos.dto.PageQueryDto;
+import com.fym.hos.dto.Show;
 import com.fym.hos.dto.TDoctorDto;
+import com.fym.hos.dto.TQualityDto;
 import com.fym.hos.entity.TDoctor;
 import com.fym.hos.service.DoctorService;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,9 +56,17 @@ public class DoctorController {
      * @return
      */
     @GetMapping("/")
-    public GlobalResponse<TDoctorDto> page(PageQueryDto<TDoctor> page, String theName) {
-        return new GlobalResponse<TDoctorDto>(doctorService.page(page, theName));
-    }
+    public Show page(PageQueryDto<TDoctor> page, String theName,@RequestParam(name="page") int cPage,@RequestParam(name="limit") int limit) {
+    	page.setCurrentPage(cPage-1);
+    	page.setPageSize(limit);
+//    	System.out.println(new GlobalResponse<TQualityDto>(qualityService.page(page, theName)).getPage().getData().get(1).getTheName());
+    	Show show = new Show();
+    	List<TDoctorDto> tq = new ArrayList<TDoctorDto>();
+    	tq = new GlobalResponse<TDoctorDto>(doctorService.page(page, theName)).getPage().getData();
+    	show.setCount(tq.size());
+    	show.setData(tq);
+        return show;
+        }
 
 
     /**

@@ -16,8 +16,8 @@
     <!--模糊搜索区域-->
     <div class="layui-row">
         <form class="layui-form layui-col-md12 ok-search">
-         	<label class="layui-form-label"> 医生编号：</label>
-          		<input class="layui-input" placeholder="医生编号" autocomplete="off" id="hNumber"/>
+         <!-- 	<label class="layui-form-label"> 医生编号：</label>
+          		<input class="layui-input" placeholder="医生编号" autocomplete="off" id="hNumber"/> -->
             <label class="layui-form-label">   医生姓名 ：</label>
             	<input class="layui-input" placeholder="医生姓名" autocomplete="off" id="name"/>
            <!--  <input class="layui-input" placeholder="请输入用户名" autocomplete="off"/> -->
@@ -101,13 +101,33 @@ var editId ;
         });
 
         form.on('submit(search)', function () {
+        	var theName = document.getElementById("name").value;
             layer.msg('正在查询，请稍后...');
+        	table.render({
+                elem: '#tableId',
+                url: '/hos/doctor/?theName='+theName,
+                limit: 10,
+                page: true,
+                cols: [[
+                    {type: 'checkbox'},
+                    {field: 'id', title: 'ID', width: "15%", sort: true},
+                    {field: 'theName', title: '姓名', width: "15%"},
+                    {field: 'theAge', title: '年龄', width: "15%"},
+                    {field: 'theSexText', title: '性别', width: "7%"},
+                    {field: 'theDesc', title: '描述', width: "40%"},
+                    {title: '操作', width: "10%", templet: '#operationTpl', align: 'center'}
+                ]],
+                done: function (res, curr, count) {
+                    $("#countNum").text(count);
+                }
+            });
             return false;
         });
 
         table.on('tool(tableFilter)', function (obj) {
             var data = obj.data;
             var layEvent = obj.event;
+            editId = obj.data.id;
             if (layEvent === 'edit') {
                 layer.open({
                     title: '编辑用户',
@@ -116,7 +136,7 @@ var editId ;
                     maxmin: true,
                     shade: 0.5,
                     area: ['90%', '90%'],
-                    content: 'user-edit.html',
+                    content: 'to?page=admin/bdoctor-add',
                     zIndex: layer.zIndex,
                     end: function () {
                         $(".layui-laypage-btn")[0].click();
@@ -125,6 +145,22 @@ var editId ;
             } else if (layEvent === 'del') {
             	
                 layer.confirm("确定要删除吗？", {skin: 'layui-layer-lan', icon: 2, title: '提示', anim: 6}, function () {
+                	console.log(obj.data.id)
+                	 $.ajax({   
+      				      type: "DELETE",   
+      				      url: "/hos/doctor/removeMulti?ids="+obj.data.id,   
+      				      contentType: "application/json; charset=utf-8",
+      				     data:JSON.stringify(obj.data.id),//将json对象转换成json字符串发送
+      			         dataType:"json",
+      				      success: function(data) {   
+      				    	  $(".layui-laypage-btn")[0].click();
+      				    	  layer.msg("操作成功！", {icon: 1, time: 1300}, function () {
+      		                      
+      		                    });
+      				      },   
+      				      error: function(err) {   
+      				      }   
+      				    }); 
                     layer.msg("操作成功！", {icon: 1, time: 1000});
                 });
             }
@@ -160,6 +196,8 @@ var editId ;
             		layer.msg('请选择一条数据编辑', {icon: 5});
         		return;
         	}
+        	console.log(d)
+        	editId = d[0].id;
         	layer.open({
                 title: '修改医生',
                 type: 2,

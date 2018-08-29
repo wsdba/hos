@@ -4,14 +4,14 @@ import java.util.List;
 
 import com.fym.hos.entity.TQuality;
 
-public class Show {
+public class Show<T> {
 	public int code;
 	
 	public int count;
 	
 	public String msg ;
 	
-	public List<TQualityDto> data ;
+	public List<T> data ;
 
 	public int getCode() {
 		return code;
@@ -37,11 +37,11 @@ public class Show {
 		this.msg = msg;
 	}
 
-	public List<TQualityDto> getData() {
+	public List<T> getData() {
 		return data;
 	}
 
-	public void setData(List<TQualityDto> data) {
+	public void setData(List<T> data) {
 		this.data = data;
 	}
 	

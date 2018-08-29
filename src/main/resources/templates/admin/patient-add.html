@@ -14,7 +14,7 @@
 <div class="ok-body">
     <!--面包屑导航区域-->
     <!--form表单-->
-    <form class="layui-form layui-form-pane ok-form">
+    <form class="layui-form layui-form-pane ok-form" lay-filter="formLay" method="post">
         <div class="layui-form-item ">
             <div class="layui-inline half_table">
             <label class="layui-form-label">住院号</label>
@@ -47,14 +47,14 @@
           	<div class="layui-inline half_table">
 	            <label class="layui-form-label">姓名</label>
 	            <div class="layui-input-block">
-	                <input type="text" name="name" placeholder="请输入姓名" autocomplete="off" class="layui-input" lay-verify="phone"/>
+	                <input type="text" name="theName" placeholder="请输入姓名" autocomplete="off" class="layui-input" lay-verify="required"/>
 	            </div>
 	         </div>
 	         <div class="layui-inline half_table">
          	 <label class="layui-form-label">性别</label>
             <div class="layui-input-block">
-                <input type="radio" name="sex" value="0" title="男"/>
-                <input type="radio" name="sex" value="1" title="女" />
+                <input type="radio" name="theSex" value="0" title="男"/>
+                <input type="radio" name="theSex" value="1" title="女" />
             </div>
             </div>
         </div>
@@ -62,27 +62,27 @@
          <div class="layui-inline half_table">
             <label class="layui-form-label">年龄</label>
             <div class="layui-input-block">
-                <input type="text" name="age" placeholder="请输入年龄" autocomplete="off" class="layui-input" lay-verify="required"/>
+                <input type="text" name="theAge" placeholder="请输入年龄" autocomplete="off" class="layui-input" lay-verify="required"/>
             </div>
             </div>
-       	  <div class="layui-inline half_table">
+       	 	 <div class="layui-inline half_table">
             <label class="layui-form-label">床位医生</label>
             <div class="layui-input-block">
-                <input type="text" name="doctor" placeholder="请输入床位医生" autocomplete="off" class="layui-input" id="birthday" lay-verify="birthdayVerify"/>
+                <input type="text" onclick="doctorList()" name="doctor" placeholder="请输入床位医生" autocomplete="off" class="layui-input" id="doctor" lay-verify="required"/>
             </div>
-            </div>
+            </div> 
         </div>
          <div class="layui-form-item">
        	 	<div class="layui-inline half_table">
 	            <label class="layui-form-label">入院时间</label>
 		            <div class="layui-input-block">
-		               <input name="date" id="inTime" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input"  type="text"/>		         
+		               <input name="inHospitalDate" id="inTime" lay-verify1="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input"  type="text"/>		         
 		        	 </div>
             </div>
        	  <div class="layui-inline half_table">
             <label class="layui-form-label">出院时间</label>
             <div class="layui-input-block">
-               <input name="date" id="outTime" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input"  type="text"/>		           
+               <input name="outHospitalDate" id="outTime" lay-verify1="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input"  type="text"/>		           
                 </div>
             </div>
         </div>
@@ -90,13 +90,13 @@
        	  <div class="layui-inline half_table">
             <label class="layui-form-label">入院诊断</label>
             <div class="layui-input-block">
-                <input type="text" name="inDiagnose" placeholder="请输入入院诊断" autocomplete="off" class="layui-input" id="birthday" lay-verify="birthdayVerify"/>
+                <input type="text" name="inHospitalDiagnosis" placeholder="请输入入院诊断" autocomplete="off" class="layui-input" id="birthday" lay-verify="birthdayVerify"/>
             </div>
             </div>
        	  <div class="layui-inline half_table">
             <label class="layui-form-label">出院诊断</label>
             <div class="layui-input-block">
-                <input type="text" name="outDiagnose" placeholder="请输入出院诊断" autocomplete="off" class="layui-input" id="birthday" lay-verify="birthdayVerify"/>
+                <input type="text" name="outHospitalDiagnosis" placeholder="请输入出院诊断" autocomplete="off" class="layui-input" id="birthday" lay-verify="birthdayVerify"/>
             </div>
             </div>
         </div>
@@ -104,39 +104,39 @@
        	  <div class="layui-inline half_table">
             <label class="layui-form-label">归档人</label>
             <div class="layui-input-block">
-                <input type="text" name="recordMan" placeholder="请输入归档人" autocomplete="off" class="layui-input" id="birthday" lay-verify="birthdayVerify"/>
+                <input type="text" name="recordMan" placeholder="请输入归档人" autocomplete="off" class="layui-input" id="recordMan" lay-verify="birthdayVerify"/>
             </div>
             </div>
        	  <div class="layui-inline half_table">
             <label class="layui-form-label">归档时间</label>
             <div class="layui-input-block">
-                <input name="date" id="recordTime" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input"  type="text"/>		            </div>
+                <input name="date" id="recordTime" lay-verify1="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input"  type="text"/>		            </div>
             </div>
         </div>
         <div class="layui-form-item">
-       	  <div class="layui-inline half_table">
+       	   <div class="layui-inline half_table">
             <label class="layui-form-label">质控人</label>
             <div class="layui-input-block">
-                <input type="text" name="qualityMan" placeholder="请输入归档人" autocomplete="off" class="layui-input" id="birthday" lay-verify="birthdayVerify"/>
+                <input type="text" onclick="qualityList()" name="quality" placeholder="请输入归档人" autocomplete="off" class="layui-input" id="quality" lay-verify="birthdayVerify"/>
             </div>
-            </div>
+            </div> 
        	  <div class="layui-inline half_table">
             <label class="layui-form-label">质控时间</label>
             <div class="layui-input-block">
-               <input name="date" id="qualityTime" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input"   type="text"/>		            </div>
+               <input name="qualityDate" id="qualityTime" lay-verify1="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input"   type="text"/>		            </div>
             </div>
         </div>
         <div class="layui-form-item">
        	  <div class="layui-inline half_table">
             <label class="layui-form-label">入出相符</label>
             <div class="layui-input-block">
-                <input type="text" name="sample" placeholder="请输入入出相符" autocomplete="off" class="layui-input" id="birthday" lay-verify="birthdayVerify"/>
+                <input type="text" name="sampleDiagnosis" placeholder="请输入入出相符" autocomplete="off" class="layui-input" id="birthday" lay-verify="birthdayVerify"/>
             </div>
             </div>
        	  <div class="layui-inline half_table">
             <label class="layui-form-label">期内归档</label>
             <div class="layui-input-block">
-                <input type="text" name="giveBack" placeholder="请输入期内归档" autocomplete="off" class="layui-input" id="birthday" lay-verify="birthdayVerify"/>
+                <input type="text" name="expectArchive" placeholder="请输入期内归档" autocomplete="off" class="layui-input" id="birthday" lay-verify="birthdayVerify"/>
             </div>
             </div>
         </div>
@@ -159,15 +159,19 @@
         </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn"  lay-filter="add">立即提交</button>
+                <button class="layui-btn" lay-submit="" lay-filter="add">立即提交</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
+         <input type="hidden" name="id" value=""></input>
+         <input type="hidden" id="doctorId" value=""></input>
+         <input type="hidden" id="qualityId" value=""></input>
     </form>
 </div>
 <!--js逻辑-->
 <script src="/../layui/layui.js"></script>
 <script>
+/*<![CDATA[*/
     layui.use(['element', 'form', 'jquery', 'laydate'], function () {
         var element = layui.element;
         var table = layui.table;
@@ -192,13 +196,125 @@
             type: "datetime"
         });
         form.on('submit(add)', function (data) {
-            console.log(data.field);
-            layer.msg("添加成功！", {icon: 6, time: 1000, anim: 4}, function () {
-                parent.layer.close(parent.layer.getFrameIndex(window.name));
-            });
+			var editId = parent.editId;
+        	console.log(data.field)
+			if(editId!=""&&editId!=undefined){
+				 $.ajax({   
+				      type: "PUT",   
+				      url: "/hos/patient/"+editId,   
+				      contentType: "application/json; charset=utf-8",
+				      data:JSON.stringify(data.field),
+				      success: function(data) {   
+				    	  layer.msg("添加成功！", {icon: 6, time: 500, anim: 4}, function () {
+				                parent.layer.close(parent.layer.getFrameIndex(window.name));
+				            });
+				      },   
+				      error: function(err) {   
+				      }   
+				    });  
+			}else{
+				 $.ajax({   
+				      type: "POST",   
+				      url: "/hos/patient/",   
+				      contentType: "application/json; charset=utf-8",
+				      data:JSON.stringify(data.field),
+				      success: function(data) {   
+				    	  layer.msg("添加成功！", {icon: 6, time: 500, anim: 4}, function () {
+				                parent.layer.close(parent.layer.getFrameIndex(window.name));
+				            });
+				      },   
+				      error: function(err) {   
+				      }   
+				    });  
+			}
             return false;
         });
     })
+    //]]>
+</script>
+
+<script type="text/javascript">
+/**
+ * 表格数据填充
+ */
+ /*<![CDATA[*/
+window.onload=function(){
+	console.log(parent.editId)
+	var eid = parent.editId;
+	var idInput = document.getElementsByName("id")[0];
+	idInput.value=eid;
+	if(eid!=""&&eid!=undefined){
+		   layui.use(['element', 'table', 'form', 'jquery', 'laydate'], function () {
+		        var element = layui.element;
+		        var form = layui.form;
+		        var $ = layui.jquery;
+		        $.ajax({   
+				      type: "GET",   
+				      url: "/hos/patient/"+eid,   
+				      contentType: "application/json; charset=utf-8",
+				      data:JSON.stringify(eid),//将json对象转换成json字符串发送
+			          dataType:"json",
+				      success: function(data) {   
+				    	  if(data.object.theSex==1){
+				    		  $("#man").attr("checked","checked");
+				    	  }else{
+							  $("#woman").attr("checked","checked");				    		  
+				    	  }
+				    	  form.render('radio');
+//				    	  if(data.object.theSex=)
+				    	  form.val("formLay", {
+					            "theName": data.object.theName // "name": "value"
+					            ,"theSex": data.object.theSex
+					            ,"theAge": data.object.theAge
+					            ,"check[write]": true
+					            ,"open": false
+					            ,"theDesc": data.object.theDesc
+					        });
+				      },   
+				      error: function(err) {   
+				      }   
+				    });   
+		        
+		        
+		      
+		   });
+	}
+}
+function doctorList(){
+	 layer.open({
+         title: '选择医生',
+         type: 2,
+         shade: false,
+         maxmin: true,
+         shade: 0.5,
+         anim: 4,
+         area: ['40%', '70%'],
+         content: 'to?page=table/doctor-table',
+         zIndex: layer.zIndex,
+         // skin: 'layui-layer-molv',
+         end: function () {
+             $(".layui-laypage-btn")[0].click();
+         }
+     });
+}
+function qualityList(){
+	layer.open({
+        title: '选择质控人员',
+        type: 2,
+        shade: false,
+        maxmin: true,
+        shade: 0.5,
+        anim: 4,
+        area: ['40%', '70%'],
+        content: 'to?page=table/quality-table',
+        zIndex: layer.zIndex,
+        // skin: 'layui-layer-molv',
+        end: function () {
+            $(".layui-laypage-btn")[0].click();
+        }
+    });
+}
+//]]>
 </script>
 </body>
 </html>

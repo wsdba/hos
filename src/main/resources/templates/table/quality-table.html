@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"></meta>
+<title>Insert title here</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta>
+    <link rel="stylesheet" href="/../layui/css/layui.css"/>
+    <link rel="stylesheet" href="/../css/scroll-bar.css"/>
+    <link rel="stylesheet" href="/../css/sub-page.css"/>
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_693759_wytlyqhtdtj1nhfr.css"/>
+    <link rel="stylesheet" href="/../css/nprogress/nprogress.css"/>
+
+</head>
+<body>
+	<table class="layui-hide" id="tableId" lay-filter="tableFilter"></table>
+	<script src="/../layui/layui.js"></script>
+<script src="/../css/nprogress/nprogress.js"></script>
+<script type="text/javascript">
+
+NProgress.start();
+window.onload = function () {
+    NProgress.done();
+}
+layui.use(['element', 'table', 'form', 'jquery', 'laydate'], function () {
+    var element = layui.element;
+    var table = layui.table;
+    var form = layui.form;
+    var $ = layui.jquery;
+    var laydate = layui.laydate; 
+    var laypage = layui.laypage;
+    //执行一个laypage实例
+    laypage.render({
+      elem: 'test1' //注意，这里的 test1 是 ID，不用加 # 号
+      ,count: 50 //数据总数，从服务端得到
+    });
+    
+    
+    
+    laydate.render({
+        elem: '#startTime',
+        type: "datetime"
+    });
+
+    laydate.render({
+        elem: '#endTime',
+        type: "datetime"
+    });
+    table.on('checkbox(tableFilter)', function(data){
+    	var doctor = parent.document.getElementById("quality");
+    	doctor.value=data.data.theName;
+    	parent.document.getElementById("qualityId").value=data.data.id;
+    	 layer.msg("选择成功！", {icon: 6, time: 200, anim: 4}, function () {
+             parent.layer.close(parent.layer.getFrameIndex(window.name));
+         });
+    	});    
+    table.render({
+        elem: '#tableId',
+        url: '/hos/quality/',
+/*            limit: 10, */
+        page:{ //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+            layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
+        //,curr: 5 //设定初始在第 5 页
+        ,groups: 1 //只显示 1 个连续页码
+        ,first: false //不显示首页
+        ,last: false //不显示尾页
+        
+      },
+        cols: [[
+            {type: 'checkbox'},
+            {field: 'id', title: 'ID', width: "25%", sort: true},
+            {field: 'theName', title: '姓名', width: "15%"},
+            {field: 'theAge', title: '年龄', width: "10%"},
+            {field: 'theSexText', title: '性别', width: "10%"},
+            {field: 'theDesc', title: '描述', width: "35%"},
+        ]],
+        done: function (res, curr, count) {
+        	var total = res.data.length;
+            $("#countNum").text(total);
+        }
+    });
+});
+
+</script>
+</body>
+</html>

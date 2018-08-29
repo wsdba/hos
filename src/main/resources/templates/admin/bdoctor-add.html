@@ -14,7 +14,7 @@
 <div class="ok-body">
     <!--面包屑导航区域-->
     <!--form表单-->
-    <form class="layui-form layui-form-pane ok-form">
+    <form class="layui-form layui-form-pane ok-form"  lay-filter="formLay" method="post">
         <div class="layui-form-item ">
             <label class="layui-form-label">姓名</label>
 	            <div class="layui-input-block">
@@ -45,7 +45,7 @@
             </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn"  lay-filter="add">立即提交</button>
+                <button class="layui-btn" lay-submit=""   lay-filter="add">立即提交</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
@@ -82,6 +82,7 @@
         	/**
 			判断是更新还是保存
 		*/
+		console.log(data)
 		var editId = parent.editId;
 		if(editId!=""){
 			 $.ajax({   
@@ -100,6 +101,7 @@
 			
 			
 		}else{
+			alert(1)
 			 $.ajax({   
 			      type: "POST",   
 			      url: "/hos/doctor/",   
@@ -125,7 +127,6 @@
  * 表格数据填充
  */
 window.onload=function(){
-	console.log(parent.editId)
 	var eid = parent.editId;
 	var idInput = document.getElementsByName("id")[0];
 	idInput.value=eid;
