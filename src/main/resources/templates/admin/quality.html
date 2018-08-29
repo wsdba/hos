@@ -16,11 +16,10 @@
     <!--模糊搜索区域-->
     <div class="layui-row">
         <form class="layui-form layui-col-md12 ok-search">
-         	<label class="layui-form-label"> 质控编号：</label>
-          		<input class="layui-input" placeholder="质控编号" autocomplete="off" id="hNumber"/>
+         	<!-- <label class="layui-form-label"> 质控编号：</label>
+          		<input class="layui-input" placeholder="质控编号" autocomplete="off" id="hNumber"/> -->
             <label class="layui-form-label">   质控姓名 ：</label>
             	<input class="layui-input" placeholder="姓名" autocomplete="off" id="name"/>
-           <!--  <input class="layui-input" placeholder="请输入用户名" autocomplete="off"/> -->
             <button class="layui-btn" lay-submit="" lay-filter="search">
                 <i class="layui-icon layui-icon-search"></i>
             </button>
@@ -96,16 +95,17 @@ var editId ;
                 {title: '操作', width: "10%", templet: '#operationTpl', align: 'center'}
             ]],
             done: function (res, curr, count) {
-                $("#countNum").text(count);
+            	var total = res.data.length;
+                $("#countNum").text(total);
             }
         });
 
         form.on('submit(search)', function () {
-        	
+        	var theName = document.getElementById("name").value;
             layer.msg('正在查询，请稍后...');
         	table.render({
                 elem: '#tableId',
-                url: '/hos/quality/',
+                url: '/hos/quality/?theName='+theName,
                 limit: 10,
                 page: true,
                 cols: [[
