@@ -70,8 +70,9 @@ public class QualityController {
 //    	System.out.println(new GlobalResponse<TQualityDto>(qualityService.page(page, theName)).getPage().getData().get(1).getTheName());
     	Show show = new Show();
     	List<TQualityDto> tq = new ArrayList<TQualityDto>();
+    	GlobalResponse<TQualityDto>  g = findAll(theName);
     	tq = new GlobalResponse<TQualityDto>(qualityService.page(page, theName)).getPage().getData();
-    	show.setCount(tq.size());
+    	show.setCount(g.getData().size());
     	show.setData(tq);
     	return show;
 //        return new GlobalResponse<TQualityDto>(qualityService.page(page, theName));

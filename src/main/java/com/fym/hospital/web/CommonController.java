@@ -28,4 +28,5 @@ public class CommonController {
 	public String toPage(String page){
 		return page;
 	}
+	
 }

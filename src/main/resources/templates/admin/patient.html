@@ -25,6 +25,7 @@
     </div>
     <!--模糊搜索区域-->
     <div class="layui-row">
+       <div style="float:left;margin-up:25px;">
         <form class="layui-form layui-col-md12 ok-search">
          	<!-- <label class="layui-form-label"> 住院号：</label>
           		<input class="layui-input" placeholder="住院号" autocomplete="off" id="hNumber"/>
@@ -34,10 +35,13 @@
             <button class="layui-btn" lay-submit="" lay-filter="search">
                 <i class="layui-icon layui-icon-search"></i>
             </button>
-            <button class="layui-btn" id="getQrcode">
-         	   <i class="iconfont icon-shangsheng"></i>生成二维码
-        	</button>
         </form>
+             </div>
+        <div style="float:left;padding-top:15px;padding-left:10px">
+            <button class="layui-btn" id="getQrcode" onclick="createQr()">
+         	   <i class="iconfont icon-shangsheng" ></i>生成二维码
+        	</button>
+        </div>
     </div>
     <!--工具栏-->
     <okToolbar>
@@ -114,8 +118,7 @@
                 {title: '操作', width: "10%", templet: '#operationTpl', align: 'center'}
             ]],
             done: function (res, curr, count) {
-            	var total = res.data.length;
-                $("#countNum").text(total);        
+                $("#countNum").text(count);        
                 }
         });
 
@@ -129,7 +132,7 @@
                 page: true,
                 cols: [[
                     {type: 'checkbox'},
-                    {field: 'id', title: 'ID', width: "15%", sort: true},
+                   /*  {field: 'id', title: 'ID', width: "15%", sort: true}, */
                     {field: 'theName', title: '姓名', width: "15%"},
                     {field: 'theAge', title: '年龄', width: "10%"},
                     {field: 'theSexText', title: '性别', width: "7%"},
@@ -294,6 +297,31 @@
             });
         })
     })
+    function createQr(){
+        var $ = layui.jquery;
+        var table = layui.table;
+        var checkStatus  = table.checkStatus('tableId');
+    	var  d =  checkStatus.data;
+    	if(d.length!=1){
+        		layer.msg('请选择一条数据生成二维码', {icon: 5});
+    		return;
+    	}
+    	console.log(d[0].id)
+    	 $.ajax({   
+			      type: "POST",   
+			      url: "/hos/patient/createQrCode?id="+d[0].id,   
+			      success: function(data) {   
+			    	  
+			    	 /*  $(".layui-laypage-btn")[0].click();
+			    	  layer.msg("操作成功！", {icon: 1, time: 1300}, function () {
+	                      
+	                    }); */
+			      },   
+			      error: function(err) {   
+			      }   
+			    });  
+    	
+    }
 </script>
 </body>
 </html>

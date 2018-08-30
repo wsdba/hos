@@ -95,8 +95,8 @@ var editId ;
  /*            limit: 10, */
             page:{ //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
                 layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
-            //,curr: 5 //设定初始在第 5 页
-            ,groups: 1 //只显示 1 个连续页码
+            ,curr: 1 //设定初始在第 5 页
+            ,groups: 3 //只显示 1 个连续页码
             ,first: false //不显示首页
             ,last: false //不显示尾页
             
@@ -111,9 +111,7 @@ var editId ;
                 {title: '操作', width: "10%", templet: '#operationTpl', align: 'center'}
             ]],
             done: function (res, curr, count) {
-            	console.log(res)
-            	var total = res.data.length;
-                $("#countNum").text(total);
+                $("#countNum").text(count);
             }
         });
 
@@ -127,7 +125,7 @@ var editId ;
                 page: true,
                 cols: [[
                     {type: 'checkbox'},
-                    {field: 'id', title: 'ID', width: "15%", sort: true},
+                  /*   {field: 'id', title: 'ID', width: "15%", sort: true}, */
                     {field: 'theName', title: '姓名', width: "15%"},
                     {field: 'theAge', title: '年龄', width: "15%"},
                     {field: 'theSexText', title: '性别', width: "7%"},

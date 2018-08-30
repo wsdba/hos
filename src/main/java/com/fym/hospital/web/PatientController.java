@@ -1,5 +1,4 @@
 package com.fym.hospital.web;
-
 import com.fym.hos.dto.GlobalResponse;
 import com.fym.hos.dto.PageQueryDto;
 import com.fym.hos.dto.Show;
@@ -7,6 +6,10 @@ import com.fym.hos.dto.TPatientDto;
 import com.fym.hos.entity.TPatient;
 import com.fym.hos.entity.TQuality;
 import com.fym.hos.service.PatientService;
+import com.hospital.app.QRCode.QRCodeUtils.QRCodeUtils;
+import com.hospital.app.QRCode.service.QRCodeService;
+import com.hospital.app.QRCode.service.impl.QRCodeServiceImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +23,8 @@ public class PatientController {
 
 	@Autowired
 	private PatientService patientService;
-	 
-
+	@Autowired
+	private QRCodeService qrCodeService;
 
     /**
      * 保存
@@ -65,8 +68,9 @@ public class PatientController {
 //    	System.out.println(new GlobalResponse<TQualityDto>(qualityService.page(page, theName)).getPage().getData().get(1).getTheName());
     	Show show = new Show();
     	List<TPatientDto> tq = new ArrayList<TPatientDto>();
+    	GlobalResponse<TPatientDto> g = findAll(theName);
     	tq = new GlobalResponse<TPatientDto>(patientService.page(page, theName)).getPage().getData();
-    	show.setCount(tq.size());
+    	show.setCount(g.getData().size());
     	show.setData(tq);
     	return show;
     	}
@@ -150,5 +154,12 @@ public class PatientController {
         return new GlobalResponse<TPatient>(0, "删除成功");
     }
 
+    
+    @PostMapping("/createQrCode")
+    public void createQrCode(@RequestParam(name="id") String id) {
+    	qrCodeService.test();
+    	qrCodeService.Creat(id, "D://",100);
+    	System.out.println("===");
+    }
 
 }
