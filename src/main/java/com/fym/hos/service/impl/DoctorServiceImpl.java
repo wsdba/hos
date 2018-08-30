@@ -16,10 +16,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.fym.hos.dao.DoctorRepository;
+import com.fym.hos.dao.QualityRepository;
 import com.fym.hos.dto.PageDto;
 import com.fym.hos.dto.PageQueryDto;
 import com.fym.hos.dto.TDoctorDto;
 import com.fym.hos.entity.TDoctor;
+import com.fym.hos.entity.TQuality;
 import com.fym.hos.service.DoctorService;
 import com.fym.utils.BeanMapperUtils;
 
@@ -27,6 +29,9 @@ import com.fym.utils.BeanMapperUtils;
 public class DoctorServiceImpl implements DoctorService {
     @Autowired
     private DoctorRepository doctorRepository;
+    
+    @Autowired
+    private QualityRepository qualityRepository;
 
     /**
 	 * 保存方法
@@ -173,5 +178,8 @@ public class DoctorServiceImpl implements DoctorService {
         return new PageDto<TDoctorDto>(findAll.getNumber(), findAll.getTotalPages(), findAll.getSize(),
                 BeanMapperUtils.mapList(findAll.getContent(), TDoctor.class, TDoctorDto.class));
     }
+    
+    
+ 
 
 }

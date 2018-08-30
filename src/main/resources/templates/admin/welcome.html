@@ -206,7 +206,8 @@
 </div>
 <!--js逻辑-->
 <script src="/../layui/layui.js"></script>
-<script>
+<script type="text/javascript">
+/*<![CDATA[*/   
     /**
      * 初始化函数
      */
@@ -233,14 +234,14 @@
      
     function addZero(time) {
     	 
-    	 <![CDATA[*/             
+    	        
     		 
     		  var i = parseInt(time);
         if (i /10 < 1) {
             i = "0" + i;
         }
         return i;
-    		 ]]>
+    		
        
     }
 
@@ -255,6 +256,7 @@
         var util = layui.util;
         util.fixbar({});
     });
+    /*]]>*/
 </script>
 <!--天气预报插件-->
 <script>
