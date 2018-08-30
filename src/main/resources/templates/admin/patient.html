@@ -100,13 +100,17 @@
             page: true,
             cols: [[
                 {type: 'checkbox'},
-                {field: 'id', title: 'ID', width: "15%", sort: true},
-                {field: 'theName', title: '姓名', width: "15%"},
+                /* {field: 'id', title: 'ID', width: "15%", sort: true}, */
+                {field: 'theName', title: '姓名', width: "9%"},
                 {field: 'theAge', title: '年龄', width: "10%"},
                 {field: 'theSexText', title: '性别', width: "7%"},
+                {field: 'hNumber', title: '住院号', width: "7%"},
+                {field: 'bedNumber', title: '床号', width: "7%"},
+                {field: 'expectArchiveText', title: '期内归档', width: "7%"},
+                {field: 'sampleDiagnosisText', title: '入出相符', width: "7%"},
                 {field: 'inHospitalDate', title: '入院时间', width: "7%"},
                 {field: 'outHospitalDate', title: '入院时间', width: "7%"},
-                {field: 'theDesc', title: '描述', width: "20%"},
+                {field: 'theDesc', title: '描述', width: "10%"},
                 {title: '操作', width: "10%", templet: '#operationTpl', align: 'center'}
             ]],
             done: function (res, curr, count) {

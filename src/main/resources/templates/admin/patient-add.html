@@ -53,8 +53,8 @@
 	         <div class="layui-inline half_table">
          	 <label class="layui-form-label">性别</label>
             <div class="layui-input-block">
-                <input type="radio" name="theSex" value="0" title="男"/>
-                <input type="radio" name="theSex" value="1" title="女" />
+                <input type="radio" name="theSex" value="1" title="男"/>
+                <input type="radio" name="theSex" value="0" title="女" />
             </div>
             </div>
         </div>
@@ -130,15 +130,15 @@
        	  <div class="layui-inline half_table">
            <label class="layui-form-label">入出相符</label>
             <div class="layui-input-block">
-                <input type="radio" name="sampleDiagnosis" value="1" title="是"/>
-                <input type="radio" name="sampleDiagnosis" value="0" title="否" />
+                <input type="radio" id="right" name="sampleDiagnosis" value="1" title="是"/>
+                <input type="radio" id="notRight" name="sampleDiagnosis" value="0" title="否" />
             </div>
             </div>
        	  <div class="layui-inline half_table">
            <label class="layui-form-label">期内归档</label>
             <div class="layui-input-block">
-                <input type="radio" name="expectArchive" value="1" title="是"/>
-                <input type="radio" name="expectArchive" value="0" title="否" />
+                <input type="radio" id="inTime" name="time" value="1" title="是"/>
+                <input type="radio" id="notInTime" name="expectArchive" value="0" title="否" />
             </div>
             </div>
         </div>
@@ -166,8 +166,8 @@
             </div>
         </div>
          <input type="hidden" name="id" value=""></input>
-         <input type="hidden" name="doctor_id" id="doctor" value=""></input>
-         <input type="hidden" name="quality" id="quality" value=""></input>
+         <input type="hidden" name="doctor.doctor_id" id="doctor" value=""></input>
+         <input type="hidden" name="quality_id" id="quality" value=""></input>
     </form>
 </div>
 <!--js逻辑-->
@@ -180,7 +180,7 @@
         var form = layui.form;
         var $ = layui.jquery;
         var laydate = layui.laydate;
-
+		
         laydate.render({
             elem: '#inTime',
             type: "datetime"
@@ -257,10 +257,21 @@ window.onload=function(){
 				      data:JSON.stringify(eid),//将json对象转换成json字符串发送
 			          dataType:"json",
 				      success: function(data) {   
+				    	  console.log(data.object)
 				    	  if(data.object.theSex==1){
 				    		  $("#man").attr("checked","checked");
 				    	  }else{
 							  $("#woman").attr("checked","checked");				    		  
+				    	  }
+				    	  if(data.object.sampleDiagnosis==1){
+				    		  $("#right").attr("checked","checked");
+				    	  }else{
+							  $("#notRight").attr("checked","checked");				    		  
+				    	  }
+				    	  if(data.object.expectArchive==1){
+				    		  $("#inTime").attr("checked","checked");
+				    	  }else{
+							  $("#notInTime").attr("checked","checked");				    		  
 				    	  }
 				    	  form.render('radio');
 //				    	  if(data.object.theSex=)
