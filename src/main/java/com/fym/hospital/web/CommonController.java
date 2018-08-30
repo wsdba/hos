@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.fym.hos.service.QualityService;
 
 @Controller
-@RequestMapping("/hos/common")
+@RequestMapping("/")
 public class CommonController {
 	
 	@Autowired
