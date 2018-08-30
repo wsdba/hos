@@ -1,6 +1,5 @@
 package com.fym.hos.dto;
 
-import static org.mockito.Matchers.intThat;
 
 import java.util.List;
 

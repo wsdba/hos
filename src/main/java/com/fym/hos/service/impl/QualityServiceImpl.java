@@ -1,13 +1,12 @@
 package com.fym.hos.service.impl;
 
-import java.util.List;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-
-import org.json.JSONObject;
+import com.fym.hos.dao.QualityRepository;
+import com.fym.hos.dto.PageDto;
+import com.fym.hos.dto.PageQueryDto;
+import com.fym.hos.dto.TQualityDto;
+import com.fym.hos.entity.TQuality;
+import com.fym.hos.service.QualityService;
+import com.fym.utils.BeanMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,13 +15,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import com.fym.hos.dao.QualityRepository;
-import com.fym.hos.dto.PageDto;
-import com.fym.hos.dto.PageQueryDto;
-import com.fym.hos.dto.TQualityDto;
-import com.fym.hos.entity.TQuality;
-import com.fym.hos.service.QualityService;
-import com.fym.utils.BeanMapperUtils;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.List;
 
 @Service
 public class QualityServiceImpl implements QualityService {
