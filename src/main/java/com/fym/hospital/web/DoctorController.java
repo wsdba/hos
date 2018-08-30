@@ -69,8 +69,9 @@ public class DoctorController {
 //    	System.out.println(new GlobalResponse<TQualityDto>(qualityService.page(page, theName)).getPage().getData().get(1).getTheName());
     	Show show = new Show();
     	List<TDoctorDto> tq = new ArrayList<TDoctorDto>();
+    	GlobalResponse<TDoctorDto> g = findAll(theName);
     	tq = new GlobalResponse<TDoctorDto>(doctorService.page(page, theName)).getPage().getData();
-    	show.setCount(tq.size());
+    	show.setCount(g.getData().size());
     	show.setData(tq);
         return show;
         }
