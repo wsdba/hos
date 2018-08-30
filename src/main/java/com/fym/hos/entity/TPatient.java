@@ -1,12 +1,23 @@
 package com.fym.hos.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.math.BigInteger;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
-import java.math.BigInteger;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 /**
@@ -28,6 +39,8 @@ public class TPatient implements Serializable {
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="archive_date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
 	private Date archiveDate;
 	/**
 	 * 床号
@@ -77,6 +90,8 @@ public class TPatient implements Serializable {
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="in_hospital_date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss" )
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
 	private Date inHospitalDate;
 	/**
 	 * 入院诊断
@@ -89,6 +104,8 @@ public class TPatient implements Serializable {
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="out_hospital_date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
 	private Date outHospitalDate;
 	/**
 	 * 出院诊断
@@ -101,6 +118,8 @@ public class TPatient implements Serializable {
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="quality_date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
 	private Date qualityDate;
 
 	/**

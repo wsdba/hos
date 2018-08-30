@@ -30,10 +30,11 @@ public class PatientController {
      * @return
      */
     @PostMapping("/")
+    @CrossOrigin
     public GlobalResponse<TPatient> add(@RequestBody TPatient tPatient) {
         /*TPatientDto tPatientDto = patientService.save(tPatient);
         return new GlobalResponse<TPatientDto>(tPatientDto);*/
-    	patientService.save(tPatient);
+    	patientService.save(tPatient); 
           return new GlobalResponse<TPatient>(0, "保存成功");
     }
 

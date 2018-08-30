@@ -52,7 +52,7 @@ public class TPatientDto {
     private Date qualityDate;
 
     private int sampleDiagnosis;
-private String sampleDiagnosisText;
+    private String sampleDiagnosisText;
     private int theAge;
 
     private String theName;
@@ -256,7 +256,7 @@ private String sampleDiagnosisText;
     }
 
     public String getTheSexText() {
-        if (theSex.equals("0"))
+        if ("0".equals(theSex))
             return "女";
         else
             return "男";
@@ -291,19 +291,19 @@ private String sampleDiagnosisText;
 
     public String getEndemicAreaText() {
        if(endemicArea==1){
-           return "三";
+           return "三病区";
        }else if(endemicArea==2){
-           return "四";
+           return "四病区";
        }else if(endemicArea==3){
 
-           return "五";
+           return "五病区";
        }else if(endemicArea==4){
 
-           return "六";
+           return "六病区";
        }else if(endemicArea==5){
-           return "七";
+           return "七病区";
        }else
-           return "二";
+           return "二病区";
     }
 
     public void setEndemicAreaText(String endemicAreaText) {
