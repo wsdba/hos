@@ -231,18 +231,14 @@
      * @param time
      * @returns {number | *}
      */
-     
+
+   
     function addZero(time) {
-    	 
-    	        
-    		 
-    		  var i = parseInt(time);
+       var i = parseInt(time);
         if (i /10 < 1) {
             i = "0" + i;
         }
         return i;
-    		
-       
     }
 
     /**
@@ -251,7 +247,7 @@
      */
     var weekday = "星期" + "日一二三四五六".charAt(new Date().getDay());
     document.getElementById("weekday").innerHTML = weekday;
-
+ 
     layui.use('util', function () {
         var util = layui.util;
         util.fixbar({});

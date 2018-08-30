@@ -53,8 +53,8 @@
 	         <div class="layui-inline half_table">
          	 <label class="layui-form-label">性别</label>
             <div class="layui-input-block">
-                <input type="radio" name="theSex" value="0" title="男"/>
-                <input type="radio" name="theSex" value="1" title="女" />
+                <input type="radio" name="theSex" value="1" title="男"/>
+                <input type="radio" name="theSex" value="0" title="女" />
             </div>
             </div>
         </div>
@@ -68,7 +68,7 @@
        	 	 <div class="layui-inline half_table">
             <label class="layui-form-label">床位医生</label>
             <div class="layui-input-block">
-                <input type="text" onclick="doctorList()" name="doctor" placeholder="请输入床位医生" autocomplete="off" class="layui-input" id="doctor" lay-verify="required"/>
+                <input type="text" onclick="doctorList()" name="doctorName" placeholder="请输入床位医生" autocomplete="off" class="layui-input" id="doctorName" lay-verify="required"/>
             </div>
             </div> 
         </div>
@@ -117,7 +117,7 @@
        	   <div class="layui-inline half_table">
             <label class="layui-form-label">质控人</label>
             <div class="layui-input-block">
-                <input type="text" onclick="qualityList()" name="quality" placeholder="请输入归档人" autocomplete="off" class="layui-input" id="quality" lay-verify="birthdayVerify"/>
+                <input type="text" onclick="qualityList()" name="qualityName" placeholder="请输入归档人" autocomplete="off" class="layui-input" id="qualityName" lay-verify="birthdayVerify"/>
             </div>
             </div> 
        	  <div class="layui-inline half_table">
@@ -128,15 +128,17 @@
         </div>
         <div class="layui-form-item">
        	  <div class="layui-inline half_table">
-            <label class="layui-form-label">入出相符</label>
+           <label class="layui-form-label">入出相符</label>
             <div class="layui-input-block">
-                <input type="text" name="sampleDiagnosis" placeholder="请输入入出相符" autocomplete="off" class="layui-input" id="birthday" lay-verify="birthdayVerify"/>
+                <input type="radio" id="right" name="sampleDiagnosis" value="1" title="是"/>
+                <input type="radio" id="notRight" name="sampleDiagnosis" value="0" title="否" />
             </div>
             </div>
        	  <div class="layui-inline half_table">
-            <label class="layui-form-label">期内归档</label>
+           <label class="layui-form-label">期内归档</label>
             <div class="layui-input-block">
-                <input type="text" name="expectArchive" placeholder="请输入期内归档" autocomplete="off" class="layui-input" id="birthday" lay-verify="birthdayVerify"/>
+                <input type="radio" id="inTime" name="time" value="1" title="是"/>
+                <input type="radio" id="notInTime" name="expectArchive" value="0" title="否" />
             </div>
             </div>
         </div>
@@ -164,8 +166,8 @@
             </div>
         </div>
          <input type="hidden" name="id" value=""></input>
-         <input type="hidden" id="doctorId" value=""></input>
-         <input type="hidden" id="qualityId" value=""></input>
+         <input type="hidden" name="doctor.doctor_id" id="doctor" value=""></input>
+         <input type="hidden" name="quality_id" id="quality" value=""></input>
     </form>
 </div>
 <!--js逻辑-->
@@ -178,7 +180,7 @@
         var form = layui.form;
         var $ = layui.jquery;
         var laydate = layui.laydate;
-
+		
         laydate.render({
             elem: '#inTime',
             type: "datetime"
@@ -197,7 +199,7 @@
         });
         form.on('submit(add)', function (data) {
 			var editId = parent.editId;
-        	console.log(data.field)
+			data = idToArray(data);
 			if(editId!=""&&editId!=undefined){
 				 $.ajax({   
 				      type: "PUT",   
@@ -255,10 +257,21 @@ window.onload=function(){
 				      data:JSON.stringify(eid),//将json对象转换成json字符串发送
 			          dataType:"json",
 				      success: function(data) {   
+				    	  console.log(data.object)
 				    	  if(data.object.theSex==1){
 				    		  $("#man").attr("checked","checked");
 				    	  }else{
 							  $("#woman").attr("checked","checked");				    		  
+				    	  }
+				    	  if(data.object.sampleDiagnosis==1){
+				    		  $("#right").attr("checked","checked");
+				    	  }else{
+							  $("#notRight").attr("checked","checked");				    		  
+				    	  }
+				    	  if(data.object.expectArchive==1){
+				    		  $("#inTime").attr("checked","checked");
+				    	  }else{
+							  $("#notInTime").attr("checked","checked");				    		  
 				    	  }
 				    	  form.render('radio');
 //				    	  if(data.object.theSex=)
@@ -293,7 +306,7 @@ function doctorList(){
          zIndex: layer.zIndex,
          // skin: 'layui-layer-molv',
          end: function () {
-             $(".layui-laypage-btn")[0].click();
+         	//    $(".layui-laypage-btn")[0].click();
          }
      });
 }
@@ -310,9 +323,14 @@ function qualityList(){
         zIndex: layer.zIndex,
         // skin: 'layui-layer-molv',
         end: function () {
-            $(".layui-laypage-btn")[0].click();
+       //     $(".layui-laypage-btn")[0].click();
         }
     });
+}
+function idToArray(data){
+	console.log(data.field)
+	
+	return data;
 }
 //]]>
 </script>
