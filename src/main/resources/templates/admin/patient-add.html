@@ -68,7 +68,7 @@
        	 	 <div class="layui-inline half_table">
             <label class="layui-form-label">床位医生</label>
             <div class="layui-input-block">
-                <input type="text" onclick="doctorList()" name="doctor" placeholder="请输入床位医生" autocomplete="off" class="layui-input" id="doctor" lay-verify="required"/>
+                <input type="text" onclick="doctorList()" name="doctorName" placeholder="请输入床位医生" autocomplete="off" class="layui-input" id="doctorName" lay-verify="required"/>
             </div>
             </div> 
         </div>
@@ -117,7 +117,7 @@
        	   <div class="layui-inline half_table">
             <label class="layui-form-label">质控人</label>
             <div class="layui-input-block">
-                <input type="text" onclick="qualityList()" name="quality" placeholder="请输入归档人" autocomplete="off" class="layui-input" id="quality" lay-verify="birthdayVerify"/>
+                <input type="text" onclick="qualityList()" name="qualityName" placeholder="请输入归档人" autocomplete="off" class="layui-input" id="qualityName" lay-verify="birthdayVerify"/>
             </div>
             </div> 
        	  <div class="layui-inline half_table">
@@ -128,15 +128,17 @@
         </div>
         <div class="layui-form-item">
        	  <div class="layui-inline half_table">
-            <label class="layui-form-label">入出相符</label>
+           <label class="layui-form-label">入出相符</label>
             <div class="layui-input-block">
-                <input type="text" name="sampleDiagnosis" placeholder="请输入入出相符" autocomplete="off" class="layui-input" id="birthday" lay-verify="birthdayVerify"/>
+                <input type="radio" name="sampleDiagnosis" value="1" title="是"/>
+                <input type="radio" name="sampleDiagnosis" value="0" title="否" />
             </div>
             </div>
        	  <div class="layui-inline half_table">
-            <label class="layui-form-label">期内归档</label>
+           <label class="layui-form-label">期内归档</label>
             <div class="layui-input-block">
-                <input type="text" name="expectArchive" placeholder="请输入期内归档" autocomplete="off" class="layui-input" id="birthday" lay-verify="birthdayVerify"/>
+                <input type="radio" name="expectArchive" value="1" title="是"/>
+                <input type="radio" name="expectArchive" value="0" title="否" />
             </div>
             </div>
         </div>
@@ -164,8 +166,8 @@
             </div>
         </div>
          <input type="hidden" name="id" value=""></input>
-         <input type="hidden" id="doctorId" value=""></input>
-         <input type="hidden" id="qualityId" value=""></input>
+         <input type="hidden" name="doctor_id" id="doctor" value=""></input>
+         <input type="hidden" name="quality" id="quality" value=""></input>
     </form>
 </div>
 <!--js逻辑-->
@@ -197,7 +199,7 @@
         });
         form.on('submit(add)', function (data) {
 			var editId = parent.editId;
-        	console.log(data.field)
+			data = idToArray(data);
 			if(editId!=""&&editId!=undefined){
 				 $.ajax({   
 				      type: "PUT",   
@@ -293,7 +295,7 @@ function doctorList(){
          zIndex: layer.zIndex,
          // skin: 'layui-layer-molv',
          end: function () {
-             $(".layui-laypage-btn")[0].click();
+         	//    $(".layui-laypage-btn")[0].click();
          }
      });
 }
@@ -310,9 +312,14 @@ function qualityList(){
         zIndex: layer.zIndex,
         // skin: 'layui-layer-molv',
         end: function () {
-            $(".layui-laypage-btn")[0].click();
+       //     $(".layui-laypage-btn")[0].click();
         }
     });
+}
+function idToArray(data){
+	console.log(data.field)
+	
+	return data;
 }
 //]]>
 </script>

@@ -46,9 +46,9 @@ layui.use(['element', 'table', 'form', 'jquery', 'laydate'], function () {
         type: "datetime"
     });
     table.on('checkbox(tableFilter)', function(data){
-    	var doctor = parent.document.getElementById("quality");
+    	var doctor = parent.document.getElementById("qualityName");
     	doctor.value=data.data.theName;
-    	parent.document.getElementById("qualityId").value=data.data.id;
+    	parent.document.getElementById("quality").value=data.data.id;
     	 layer.msg("选择成功！", {icon: 6, time: 200, anim: 4}, function () {
              parent.layer.close(parent.layer.getFrameIndex(window.name));
          });
@@ -67,11 +67,11 @@ layui.use(['element', 'table', 'form', 'jquery', 'laydate'], function () {
       },
         cols: [[
             {type: 'checkbox'},
-            {field: 'id', title: 'ID', width: "25%", sort: true},
+           /*  {field: 'id', title: 'ID', width: "25%", sort: true}, */
             {field: 'theName', title: '姓名', width: "15%"},
             {field: 'theAge', title: '年龄', width: "10%"},
             {field: 'theSexText', title: '性别', width: "10%"},
-            {field: 'theDesc', title: '描述', width: "35%"},
+            {field: 'theDesc', title: '描述', width: "45%"},
         ]],
         done: function (res, curr, count) {
         	var total = res.data.length;
