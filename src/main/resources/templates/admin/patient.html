@@ -311,7 +311,23 @@
     		return;
     	}
     	console.log(d[0].id)
-    	 $.ajax({   
+    	
+    	layer.open({
+                title: '生成的二维码',
+                type: 2,
+                shade: false,
+                maxmin: true,
+                shade: 0.5,
+                anim: 4,
+                area: ['26%', '50%'],
+                content: 'to?page=qr/qrcode',
+                zIndex: layer.zIndex,
+                // skin: 'layui-layer-molv',
+                end: function () {
+                    $(".layui-laypage-btn")[0].click();
+                }
+            });
+    	/*  $.ajax({   
 			      type: "POST",   
 			      url: "/hos/patient/createQrCode?id="+d[0].id,   
 			      success: function(data) {   
@@ -319,11 +335,11 @@
 			    	 /*  $(".layui-laypage-btn")[0].click();
 			    	  layer.msg("操作成功！", {icon: 1, time: 1300}, function () {
 	                      
-	                    }); */
+	                    });  
 			      },   
 			      error: function(err) {   
 			      }   
-			    });  
+			    });   */
     	
     }
     

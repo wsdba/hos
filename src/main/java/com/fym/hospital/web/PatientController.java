@@ -6,9 +6,7 @@ import com.fym.hos.dto.TPatientDto;
 import com.fym.hos.entity.TPatient;
 import com.fym.hos.entity.TQuality;
 import com.fym.hos.service.PatientService;
-import com.hospital.app.QRCode.QRCodeUtils.QRCodeUtils;
-import com.hospital.app.QRCode.service.QRCodeService;
-import com.hospital.app.QRCode.service.impl.QRCodeServiceImpl;
+import com.fym.utils.QRCodeUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +21,6 @@ public class PatientController {
 
 	@Autowired
 	private PatientService patientService;
-	private QRCodeService qrCodeService;
 
     /**
      * 保存
@@ -154,12 +151,11 @@ public class PatientController {
     }
 
     
-    @PostMapping("/createQrCode")
+    @GetMapping("/createQrCode")
     public void createQrCode(@RequestParam(name="id") String id) {
-    	QRCodeUtils q = null ;
-    	q.Creat(id, "D://",100);
-    	qrCodeService.test();
-    	System.out.println("===");
+    	
+//    	QRCodeUtils.Creat(id, path, 150);
+    	
     }
 
 }

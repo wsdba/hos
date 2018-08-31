@@ -11,81 +11,80 @@ import javax.imageio.ImageIO;
 import com.swetake.util.Qrcode;
 
 import jp.sourceforge.qrcode.QRCodeDecoder;
-
 /**
- * ï¿½ï¿½ï¿½ï¿½ï¿½Í½ï¿½ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½
+ * ´´½¨ºÍ½âÎö¶þÎ¬Âë
  * 
  * @author Groot
  *
  */
-public class QRCodeUtils {
+	public class QRCodeUtils {
 
-	/**
-	 * 
-	 * @param QRData ï¿½ï¿½Î¬ï¿½ë±£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	 * @param path ï¿½ï¿½Î¬ï¿½ë±£ï¿½ï¿½Â·ï¿½ï¿½
-	 * @param size ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½Î¬ï¿½ï¿½ß´ç£¬È¡Öµï¿½ï¿½Î§1-40ï¿½ï¿½ÖµÔ½ï¿½ï¿½ß´ï¿½Ô½ï¿½ó£¬¿É´æ´¢ï¿½ï¿½ï¿½ï¿½Ï¢Ô½ï¿½ï¿½
-	 * @returnï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½BufferedImage
-	 */
-	public BufferedImage Creat(String QRData, String path, int size) {
-		BufferedImage bufImg = null;
-		try {
-			Qrcode qrcodeHandler = new Qrcode();
-			qrcodeHandler.setQrcodeErrorCorrect('M');
-			qrcodeHandler.setQrcodeEncodeMode('B');
-			qrcodeHandler.setQrcodeVersion(size);
-			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½ï¿½Ö½ï¿½ï¿½ï¿½ï¿½é£¬ï¿½ï¿½ï¿½Ã±ï¿½ï¿½ï¿½ï¿½Ê½
-			byte[] contentBytes = QRData.getBytes("utf-8");
-			// Í¼Æ¬ï¿½ß´ï¿½
-			int imgSize = 67 + 12 * (size - 1);
-			bufImg = new BufferedImage(imgSize, imgSize, BufferedImage.TYPE_INT_RGB);
-			Graphics2D gs = bufImg.createGraphics();
-			// ï¿½ï¿½ï¿½Ã±ï¿½ï¿½ï¿½ï¿½ï¿½É«
-			gs.setBackground(Color.WHITE);
-			gs.clearRect(0, 0, imgSize, imgSize);
-			// ï¿½è¶¨Í¼ï¿½ï¿½ï¿½ï¿½É«> BLACK
-			gs.setColor(Color.BLACK);
-			// ï¿½ï¿½ï¿½ï¿½Æ«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½Üµï¿½ï¿½Â½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-			int pixoff = 2;
-			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½> ï¿½ï¿½Î¬ï¿½ï¿½
-			if (contentBytes.length > 0 && contentBytes.length < 800) {
-				boolean[][] codeOut = qrcodeHandler.calQrcode(contentBytes);
-				for (int i = 0; i < codeOut.length; i++) {
-					for (int j = 0; j < codeOut.length; j++) {
-						if (codeOut[j][i]) {
-							gs.fillRect(j * 3 + pixoff, i * 3 + pixoff, 3, 3);
+		/**
+		 * 
+		 * @param QRData ¶þÎ¬Âë±£´æµÄÄÚÈÝ
+		 * @param path ¶þÎ¬Âë±£³ÖÂ·¾¶
+		 * @param size ÉèÖÃÉèÖÃ¶þÎ¬Âë³ß´ç£¬È¡Öµ·¶Î§1-40£¬ÖµÔ½´ó³ß´çÔ½´ó£¬¿É´æ´¢µÄÐÅÏ¢Ô½´ó
+		 * @return£º´øÓÐÐÅÏ¢µÄBufferedImage
+		 */
+		public static BufferedImage Creat(String QRData, String path, int size) {
+			BufferedImage bufImg = null;
+			try {
+				Qrcode qrcodeHandler = new Qrcode();
+				qrcodeHandler.setQrcodeErrorCorrect('M');
+				qrcodeHandler.setQrcodeEncodeMode('B');
+				qrcodeHandler.setQrcodeVersion(size);
+				// »ñµÃÄÚÈÝµÄ×Ö½ÚÊý×é£¬ÉèÖÃ±àÂë¸ñÊ½
+				byte[] contentBytes = QRData.getBytes("utf-8");
+				// Í¼Æ¬³ß´ç
+				int imgSize = 67 + 12 * (size - 1);
+				bufImg = new BufferedImage(imgSize, imgSize, BufferedImage.TYPE_INT_RGB);
+				Graphics2D gs = bufImg.createGraphics();
+				// ÉèÖÃ±³¾°ÑÕÉ«
+				gs.setBackground(Color.WHITE);
+				gs.clearRect(0, 0, imgSize, imgSize);
+				// Éè¶¨Í¼ÏñÑÕÉ«> BLACK
+				gs.setColor(Color.BLACK);
+				// ÉèÖÃÆ«ÒÆÁ¿£¬²»ÉèÖÃ¿ÉÄÜµ¼ÖÂ½âÎö³ö´í
+				int pixoff = 2;
+				// ÊäÈëÄÚÈÝ> ¶þÎ¬Âë
+				if (contentBytes.length > 0 && contentBytes.length < 800) {
+					boolean[][] codeOut = qrcodeHandler.calQrcode(contentBytes);
+					for (int i = 0; i < codeOut.length; i++) {
+						for (int j = 0; j < codeOut.length; j++) {
+							if (codeOut[j][i]) {
+								gs.fillRect(j * 3 + pixoff, i * 3 + pixoff, 3, 3);
+							}
 						}
 					}
+				} else {
+					throw new Exception("QRCode content bytes length = " + contentBytes.length + " not in [0, 800].");
 				}
-			} else {
-				throw new Exception("QRCode content bytes length = " + contentBytes.length + " not in [0, 800].");
+				gs.dispose();
+				bufImg.flush();
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			gs.dispose();
-			bufImg.flush();
-		} catch (Exception e) {
-			e.printStackTrace();
+			return bufImg;
 		}
-		return bufImg;
-	}
 
-	/**
-	 * 
-	 * 
-	 * @param path ï¿½ï¿½ ï¿½ï¿½Î¬ï¿½ï¿½Â·ï¿½ï¿½
-	 * @return:ï¿½ï¿½Î¬ï¿½ë±£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	 */
-	public String readQRCode(String path) {
-		BufferedImage bufferedImage;
-		String result =null;
-		try {
-			bufferedImage = ImageIO.read(new File(path));
-			QRCodeDecoder qrCodeDecoder = new QRCodeDecoder();
-			result= new String(qrCodeDecoder.decode(new MyQRCodeImage(bufferedImage)), "utf-8");
-			
-		} catch (IOException e) {
-			e.printStackTrace();
+		/**
+		 * 
+		 * 
+		 * @param path £º ¶þÎ¬ÂëÂ·¾¶
+		 * @return:¶þÎ¬Âë±£´æµÄÄÚÈÝ
+		 */
+		public String readQRCode(String path) {
+			BufferedImage bufferedImage;
+			String result =null;
+			try {
+				bufferedImage = ImageIO.read(new File(path));
+				QRCodeDecoder qrCodeDecoder = new QRCodeDecoder();
+				result= new String(qrCodeDecoder.decode(new MyQRCodeImage(bufferedImage)), "utf-8");
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return result;
 		}
-		return result;
+		
 	}
-	
-}
