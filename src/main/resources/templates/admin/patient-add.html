@@ -166,8 +166,8 @@
             </div>
         </div>
          <input type="hidden" name="id" value=""></input>
-         <input type="hidden" name="doctor.doctor_id" id="doctor" value=""></input>
-         <input type="hidden" name="quality_id" id="quality" value=""></input>
+         <input type="hidden" name="doctor" id="doctor" value=""></input>
+         <input type="hidden" name="quality" id="quality" value=""></input>
     </form>
 </div>
 <!--js逻辑-->
@@ -200,6 +200,7 @@
         form.on('submit(add)', function (data) {
 			var editId = parent.editId;
 			data = idToArray(data);
+			console.log(data)
 			if(editId!=""&&editId!=undefined){
 				 $.ajax({   
 				      type: "PUT",   
@@ -328,9 +329,27 @@ function qualityList(){
     });
 }
 function idToArray(data){
-	console.log(data.field)
-	
+	var d;
+	var q;
+	 for(var i in data.field){
+		if(i=="doctor"  ){
+		  d = new createDoctor(data.field[i]);
+	//	data.field.i = d ;	
+	 	}
+		if(i =="quality"){
+		  q = new createDoctor(data.field[i]);
+	//	data.field.i = q;
+		}
+	 }
+	 data.field.doctor =  d;
+	 data.field.quality = q;
+	 console.log(data)
 	return data;
+}
+
+function createDoctor(id)
+{
+this.id = id;
 }
 //]]>
 </script>

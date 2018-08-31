@@ -23,7 +23,6 @@ public class PatientController {
 
 	@Autowired
 	private PatientService patientService;
-	@Autowired
 	private QRCodeService qrCodeService;
 
     /**
@@ -157,8 +156,9 @@ public class PatientController {
     
     @PostMapping("/createQrCode")
     public void createQrCode(@RequestParam(name="id") String id) {
+    	QRCodeUtils q = null ;
+    	q.Creat(id, "D://",100);
     	qrCodeService.test();
-    	qrCodeService.Creat(id, "D://",100);
     	System.out.println("===");
     }
 
