@@ -13,7 +13,7 @@
 <body>
 <div class="ok-body">
     <!--面包屑导航区域-->
-    <div class="ok-body-breadcrumb">
+   <!--  <div class="ok-body-breadcrumb">
             <span class="layui-breadcrumb">
                 <a><cite>首页</cite></a>
                 <a><cite>常用页面</cite></a>
@@ -22,7 +22,7 @@
         <a class="layui-btn layui-btn-small" href="javascript:location.replace(location.href);" title="刷新">
             <i class="layui-icon layui-icon-refresh"></i>
         </a>
-    </div>
+    </div> -->
     <!--模糊搜索区域-->
     <div class="layui-row">
        <div style="float:left;margin-up:25px;">
@@ -105,16 +105,16 @@
             cols: [[
                 {type: 'checkbox'},
                 /* {field: 'id', title: 'ID', width: "15%", sort: true}, */
+                {field: 'endemicAreaText', title: '病区', width: "9%"},
+                {field: 'hNumber', title: '住院号', width: "7%"},
+                {field: 'bedNumber', title: '床号', width: "7%"},
                 {field: 'theName', title: '姓名', width: "9%"},
                 {field: 'theAge', title: '年龄', width: "10%"},
                 {field: 'theSexText', title: '性别', width: "7%"},
-                {field: 'hNumber', title: '住院号', width: "7%"},
-                {field: 'bedNumber', title: '床号', width: "7%"},
                 {field: 'expectArchiveText', title: '期内归档', width: "7%"},
                 {field: 'sampleDiagnosisText', title: '入出相符', width: "7%"},
-                {field: 'inHospitalDate', title: '入院时间', width: "7%"},
-                {field: 'outHospitalDate', title: '入院时间', width: "7%"},
-                {field: 'theDesc', title: '描述', width: "10%"},
+                {field: 'inHospitalDate', title: '入院时间', width: "7%",templet:'<div>{{ Format(d.inHospitalDate,"yyyy-MM-dd")}}</div>'},
+                {field: 'outHospitalDate', title: '入院时间', width: "7%",templet:'<div>{{ Format(d.outHospitalDate,"yyyy-MM-dd")}}</div>'},
                 {title: '操作', width: "10%", templet: '#operationTpl', align: 'center'}
             ]],
             done: function (res, curr, count) {
@@ -133,12 +133,16 @@
                 cols: [[
                     {type: 'checkbox'},
                    /*  {field: 'id', title: 'ID', width: "15%", sort: true}, */
+                    {field: 'endemicAreaText', title: '病区', width: "9%"},
+                    {field: 'hNumber', title: '住院号', width: "7%"},
+                    {field: 'bedNumber', title: '床号', width: "7%"},
                     {field: 'theName', title: '姓名', width: "15%"},
                     {field: 'theAge', title: '年龄', width: "10%"},
                     {field: 'theSexText', title: '性别', width: "7%"},
-                    {field: 'inHospitalDate', title: '入院时间', width: "7%"},
-                    {field: 'outHospitalDate', title: '入院时间', width: "7%"},
-                    {field: 'theDesc', title: '描述', width: "20%"},
+                    {field: 'expectArchiveText', title: '期内归档', width: "7%"},
+                    {field: 'sampleDiagnosisText', title: '入出相符', width: "7%"},
+                    {field: 'inHospitalDate', title: '入院时间', width: "7%",templet:'<div>{{ Format(d.inHospitalDate,"yyyy-MM-dd")}}</div>'},
+                    {field: 'outHospitalDate', title: '入院时间', width: "7%",templet:'<div>{{ Format(d.outHospitalDate,"yyyy-MM-dd")}}</div>'},
                     {title: '操作', width: "10%", templet: '#operationTpl', align: 'center'}
                 ]],
                 done: function (res, curr, count) {
@@ -241,7 +245,6 @@
         $("#batchDel").click(function () {
         	var checkStatus  = table.checkStatus('tableId');
         	var  d =  checkStatus.data;
-        	console.log(d)
         	if(d.length==0){
             		layer.msg('请选择至少一条数据', {icon: 5});
         		return;
@@ -280,6 +283,7 @@
         })
 /*]]>*/
         $("#addUser").click(function () {
+        	editId = "";
             layer.open({
                 title: '添加病人',
                 type: 2,
@@ -322,6 +326,46 @@
 			    });  
     	
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+ // 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，   
+ // 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字)   
+ // 例子：   
+ //Format("2016-10-04 8:9:4.423","yyyy-MM-dd hh:mm:ss.S") ==> 2016-10-04 08:09:04.423   
+ // Format("1507353913000","yyyy-M-d h:m:s.S")      ==> 2017-10-7 13:25:13.0  
+ function Format(datetime,fmt) {
+   console.log(parseInt(datetime));
+   if (parseInt(datetime)==datetime) {
+     if (datetime.length==10) {
+       datetime=parseInt(datetime)*1000;
+     } else if(datetime.length==13) {
+       datetime=parseInt(datetime);
+     }
+   }
+   datetime=new Date(datetime);
+   var o = {
+   "M+" : datetime.getMonth()+1,                 //月份   
+   "d+" : datetime.getDate(),                    //日   
+   "h+" : datetime.getHours(),                   //小时   
+   "m+" : datetime.getMinutes(),                 //分   
+   "s+" : datetime.getSeconds(),                 //秒   
+   "q+" : Math.floor((datetime.getMonth()+3)/3), //季度   
+   "S"  : datetime.getMilliseconds()             //毫秒   
+   };   
+   if(/(y+)/.test(fmt))   
+   fmt=fmt.replace(RegExp.$1, (datetime.getFullYear()+"").substr(4 - RegExp.$1.length));   
+   for(var k in o)   
+   if(new RegExp("("+ k +")").test(fmt))   
+   fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));   
+   return fmt;
+ }
 </script>
 </body>
 </html>
