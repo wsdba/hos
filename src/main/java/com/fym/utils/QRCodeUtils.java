@@ -27,7 +27,7 @@ public class QRCodeUtils {
 	 * @param size �������ö�ά��ߴ磬ȡֵ��Χ1-40��ֵԽ��ߴ�Խ�󣬿ɴ洢����ϢԽ��
 	 * @return��������Ϣ��BufferedImage
 	 */
-	public BufferedImage Creat(String QRData, String path, int size) {
+	public static BufferedImage Creat(String QRData, String path, int size) {
 		BufferedImage bufImg = null;
 		try {
 			Qrcode qrcodeHandler = new Qrcode();

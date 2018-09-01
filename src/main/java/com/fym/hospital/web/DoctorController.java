@@ -63,11 +63,11 @@ public class DoctorController {
      * @return
      */
     @GetMapping("/")
-    public Show page(PageQueryDto<TDoctor> page, String theName,@RequestParam(name="page") int cPage,@RequestParam(name="limit") int limit) {
+    public Show<TDoctorDto> page(PageQueryDto<TDoctor> page, String theName,@RequestParam(name="page") int cPage,@RequestParam(name="limit") int limit) {
     	page.setCurrentPage(cPage-1);
     	page.setPageSize(limit);
 //    	System.out.println(new GlobalResponse<TQualityDto>(qualityService.page(page, theName)).getPage().getData().get(1).getTheName());
-    	Show show = new Show();
+    	Show<TDoctorDto> show = new Show<TDoctorDto>();
     	List<TDoctorDto> tq = new ArrayList<TDoctorDto>();
     	GlobalResponse<TDoctorDto> g = findAll(theName);
     	tq = new GlobalResponse<TDoctorDto>(doctorService.page(page, theName)).getPage().getData();
