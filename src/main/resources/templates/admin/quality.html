@@ -43,7 +43,7 @@
     </okToolbar>
     <!--数据表格-->
     <table class="layui-hide" id="tableId" lay-filter="tableFilter"></table>
-       <div id="test1"></div> 
+       <!-- <div id="test1"></div>  -->
 </div>
 <!--js逻辑-->
 <script src="/../layui/layui.js"></script>
@@ -93,7 +93,7 @@ var editId ;
             elem: '#tableId',
             url: '/hos/quality/',
  /*            limit: 10, */
-            page:{ //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+          /*   page:{ //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
                 layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
             ,curr: 1 //设定初始在第 5 页
             ,groups: 3 //只显示 1 个连续页码
@@ -101,6 +101,9 @@ var editId ;
             ,last: false //不显示尾页
             
           },
+           */
+          limit: 10,
+          page: true,
             cols: [[
                 {type: 'checkbox'},
             /*     {field: 'id', title: 'ID', width: "15%", sort: true}, */

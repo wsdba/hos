@@ -89,6 +89,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
         </dependency>
+        
+        <dependency>
+			 <groupId>QRCode</groupId>
+				 <artifactId>QRCode</artifactId>
+			 <version>3.0</version>
+		</dependency> 
 	</dependencies>
 
 	<build>

@@ -85,7 +85,7 @@
        	 	<div class="layui-inline half_table">
 	            <label class="layui-form-label">入院时间</label>
 		            <div class="layui-input-block">
-		               <input name="inHospitalDate" id="inTime" lay-verify1="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input"  type="text"/>		         
+		               <input name="inHospitalDate" id="inHospitalDate" lay-verify1="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input"  type="text"/>		         
 		        	 </div>
             </div>
        	  <div class="layui-inline half_table">
@@ -254,8 +254,6 @@ window.onload=function(){
 	var eid = parent.editId;
 	var idInput = document.getElementsByName("id")[0];
 	idInput.value=eid;
-	console.log("========")
-	console.log(eid)
 	if(eid!=""&&eid!=undefined){
 		   layui.use(['element', 'table', 'form', 'jquery', 'laydate'], function () {
 		        var element = layui.element;
@@ -299,6 +297,7 @@ window.onload=function(){
 				    	var ad = new Date(data.object.archiveDate)
 				      	var adString ;
 				    	adString =dateFtt("yyyy-MM-dd hh:mm:ss",ad); 
+				    	console.log(data.object)
 				    	  form.val("formLay", {
 					            "theName": data.object.theName // "name": "value"
 					            ,"theSex": data.object.theSex

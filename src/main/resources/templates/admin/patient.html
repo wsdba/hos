@@ -113,8 +113,8 @@
                 {field: 'theSexText', title: '性别', width: "7%"},
                 {field: 'expectArchiveText', title: '期内归档', width: "7%"},
                 {field: 'sampleDiagnosisText', title: '入出相符', width: "7%"},
-                {field: 'inHospitalDate', title: '入院时间', width: "7%",templet:'<div>{{ Format(d.inHospitalDate,"yyyy-MM-dd")}}</div>'},
-                {field: 'outHospitalDate', title: '入院时间', width: "7%",templet:'<div>{{ Format(d.outHospitalDate,"yyyy-MM-dd")}}</div>'},
+                {field: 'inHospitalDate', title: '入院时间', width: "10%",templet:'<div>{{ Format(d.inHospitalDate,"yyyy-MM-dd   hh:mm")}}</div>'},
+                {field: 'outHospitalDate', title: '入院时间', width: "10%",templet:'<div>{{ Format(d.outHospitalDate,"yyyy-MM-dd   hh:mm")}}</div>'},
                 {title: '操作', width: "10%", templet: '#operationTpl', align: 'center'}
             ]],
             done: function (res, curr, count) {
@@ -141,8 +141,8 @@
                     {field: 'theSexText', title: '性别', width: "7%"},
                     {field: 'expectArchiveText', title: '期内归档', width: "7%"},
                     {field: 'sampleDiagnosisText', title: '入出相符', width: "7%"},
-                    {field: 'inHospitalDate', title: '入院时间', width: "7%",templet:'<div>{{ Format(d.inHospitalDate,"yyyy-MM-dd")}}</div>'},
-                    {field: 'outHospitalDate', title: '入院时间', width: "7%",templet:'<div>{{ Format(d.outHospitalDate,"yyyy-MM-dd")}}</div>'},
+                    {field: 'inHospitalDate', title: '入院时间', width: "10%",templet:'<div>{{ Format(d.inHospitalDate,"yyyy-MM-dd   hh:mm")}}</div>'},
+                    {field: 'outHospitalDate', title: '入院时间', width: "10%",templet:'<div>{{ Format(d.outHospitalDate,"yyyy-MM-dd   hh:mm")}}</div>'},
                     {title: '操作', width: "10%", templet: '#operationTpl', align: 'center'}
                 ]],
                 done: function (res, curr, count) {
@@ -311,7 +311,23 @@
     		return;
     	}
     	console.log(d[0].id)
-    	 $.ajax({   
+    	
+    	layer.open({
+                title: '生成的二维码',
+                type: 2,
+                shade: false,
+                maxmin: true,
+                shade: 0.5,
+                anim: 4,
+                area: ['26%', '50%'],
+                content: 'to?page=qr/qrcode',
+                zIndex: layer.zIndex,
+                // skin: 'layui-layer-molv',
+                end: function () {
+                    $(".layui-laypage-btn")[0].click();
+                }
+            });
+    	/*  $.ajax({   
 			      type: "POST",   
 			      url: "/hos/patient/createQrCode?id="+d[0].id,   
 			      success: function(data) {   
@@ -319,11 +335,11 @@
 			    	 /*  $(".layui-laypage-btn")[0].click();
 			    	  layer.msg("操作成功！", {icon: 1, time: 1300}, function () {
 	                      
-	                    }); */
+	                    });  
 			      },   
 			      error: function(err) {   
 			      }   
-			    });  
+			    });   */
     	
     }
     
