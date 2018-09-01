@@ -115,7 +115,7 @@
                 {field: 'sampleDiagnosisText', title: '入出相符', width: "7%"},
                 {field: 'inHospitalDate', title: '入院时间', width: "10%",templet:'<div>{{ Format(d.inHospitalDate,"yyyy-MM-dd   hh:mm")}}</div>'},
                 {field: 'outHospitalDate', title: '入院时间', width: "10%",templet:'<div>{{ Format(d.outHospitalDate,"yyyy-MM-dd   hh:mm")}}</div>'},
-                {title: '操作', width: "10%", templet: '#operationTpl', align: 'center'}
+              /*   {title: '操作', width: "10%", templet: '#operationTpl', align: 'center'} */
             ]],
             done: function (res, curr, count) {
                 $("#countNum").text(count);        
