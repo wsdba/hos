@@ -34,7 +34,7 @@ public class CommonController {
 	   
     @GetMapping("/createQrCode")
     public void createQrCode( HttpServletResponse response ,@RequestParam(name="id") String id) throws IOException {
-    	   ImageIO.write(QRCodeUtils.Creat(id, null, 150), "png", response.getOutputStream());
+    	   ImageIO.write(QRCodeUtils.Creat(id, null, 10), "png", response.getOutputStream());
     	
     }
 }

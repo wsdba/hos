@@ -21,14 +21,6 @@ import com.fym.hos.dto.Show;
 import com.fym.hos.dto.TPatientDto;
 import com.fym.hos.entity.TPatient;
 import com.fym.hos.service.PatientService;
-import com.fym.utils.QRCodeUtils;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping("/hos/patient")
