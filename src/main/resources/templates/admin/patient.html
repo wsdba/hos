@@ -105,10 +105,10 @@
             cols: [[
                 {type: 'checkbox'},
                 /* {field: 'id', title: 'ID', width: "15%", sort: true}, */
-                {field: 'endemicAreaText', title: '病区', width: "9%"},
                 {field: 'hNumber', title: '住院号', width: "7%"},
-                {field: 'bedNumber', title: '床号', width: "7%"},
                 {field: 'theName', title: '姓名', width: "9%"},
+                {field: 'bedNumber', title: '床号', width: "7%"},
+                {field: 'endemicAreaText', title: '病区', width: "9%"},
                 {field: 'theAge', title: '年龄', width: "10%"},
                 {field: 'theSexText', title: '性别', width: "7%"},
                 {field: 'expectArchiveText', title: '期内归档', width: "7%"},
@@ -133,10 +133,10 @@
                 cols: [[
                     {type: 'checkbox'},
                    /*  {field: 'id', title: 'ID', width: "15%", sort: true}, */
-                    {field: 'endemicAreaText', title: '病区', width: "9%"},
                     {field: 'hNumber', title: '住院号', width: "7%"},
+                    {field: 'theName', title: '姓名', width: "9%"},
                     {field: 'bedNumber', title: '床号', width: "7%"},
-                    {field: 'theName', title: '姓名', width: "15%"},
+                    {field: 'endemicAreaText', title: '病区', width: "9%"},
                     {field: 'theAge', title: '年龄', width: "10%"},
                     {field: 'theSexText', title: '性别', width: "7%"},
                     {field: 'expectArchiveText', title: '期内归档', width: "7%"},
@@ -187,6 +187,7 @@
      		                    });
      				      },   
      				      error: function(err) {   
+     				   	  layer.msg('操作失败', {icon: 5});
      				      }   
      				    }); 
                     layer.msg("操作成功！", {icon: 1, time: 1000});
@@ -204,7 +205,6 @@
                     for (var i = 0; i < checkStatus.data.length; i++) {
                         idsStr += checkStatus.data[i].id + ',';
                     }
-                    console.log("选择的id-->" + idsStr);
                     layer.msg("操作成功！", {icon: 1, time: 1000}, function () {
                         $(".layui-laypage-btn")[0].click();
                     });
@@ -270,7 +270,8 @@
   		                      
   		                    });
   				      },   
-  				      error: function(err) {   
+  				      error: function(err) { 
+  				  	 	  layer.msg('操作失败', {icon: 5});
   				      }   
   				    });  
                 } else {

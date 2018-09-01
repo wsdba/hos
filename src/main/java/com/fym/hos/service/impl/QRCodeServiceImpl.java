@@ -16,9 +16,10 @@ public class QRCodeServiceImpl implements QRCodeService {
 		return qrCodeUtils.readQRCode(path);
 	}
 
+	@Override
 	public void test() {
 		// TODO Auto-generated method stub
-		System.out.println("555555555555");
+		
 	}
 
 }

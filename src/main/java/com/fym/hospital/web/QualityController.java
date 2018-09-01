@@ -138,7 +138,10 @@ public class QualityController {
      */
     @DeleteMapping("/removeMulti")
     public GlobalResponse<TQuality> removeMulti(@RequestParam(name="ids") String ids) {
-    	System.out.println("===");
+    	boolean flag = qualityService.isCite(ids,"quliaty");
+    	if(flag == false){
+    		 return new GlobalResponse<TQuality>(1, "删除失败");
+    	}
         qualityService.removeMulti(ids);
         return new GlobalResponse<TQuality>(0, "删除成功");
     }

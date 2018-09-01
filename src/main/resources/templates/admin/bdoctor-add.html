@@ -91,17 +91,17 @@
 			      contentType: "application/json; charset=utf-8",
 			      data:JSON.stringify(data.field),
 			      success: function(data) {   
-			    	  layer.msg("添加成功！", {icon: 6, time: 500, anim: 4}, function () {
+			    	  layer.msg("修改成功！", {icon: 6, time: 500, anim: 4}, function () {
 			                parent.layer.close(parent.layer.getFrameIndex(window.name));
 			            });
 			      },   
 			      error: function(err) {   
-			      }   
+			    	  layer.msg('修改失败', {icon: 5});
+			      }  
 			    });  
 			
 			
 		}else{
-			alert(1)
 			 $.ajax({   
 			      type: "POST",   
 			      url: "/hos/doctor/",   
@@ -113,6 +113,7 @@
 			            });
 			      },   
 			      error: function(err) {   
+			    	  layer.msg('添加失败', {icon: 5});
 			      }   
 			    });  
 			
@@ -161,6 +162,7 @@ window.onload=function(){
 					        });
 				      },   
 				      error: function(err) {   
+				    	  layer.msg('填充失败', {icon: 5});
 				      }   
 				    });   
 		        

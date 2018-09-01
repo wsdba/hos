@@ -209,7 +209,6 @@
         form.on('submit(add)', function (data) {
 			var editId = parent.editId;
 			data = idToArray(data);
-			console.log(data)
 			if(editId!=""&&editId!=undefined){
 				 $.ajax({   
 				      type: "PUT",   
@@ -217,11 +216,12 @@
 				      contentType: "application/json; charset=utf-8",
 				      data:JSON.stringify(data.field),
 				      success: function(data) {   
-				    	  layer.msg("添加成功！", {icon: 6, time: 500, anim: 4}, function () {
+				    	  layer.msg("修改成功！", {icon: 6, time: 500, anim: 4}, function () {
 				                parent.layer.close(parent.layer.getFrameIndex(window.name));
 				            });
 				      },   
 				      error: function(err) {   
+				    	  layer.msg('修改失败', {icon: 5});
 				      }   
 				    });  
 			}else{
@@ -266,7 +266,6 @@ window.onload=function(){
 				      data:JSON.stringify(eid),//将json对象转换成json字符串发送
 			          dataType:"json",
 				      success: function(data) {   
-				    	  console.log(data.object)
 				    	  if(data.object.theSex==1){
 				    		  $("#man").attr("checked","checked");
 				    	  }else{
@@ -325,6 +324,7 @@ window.onload=function(){
 					        });
 				      },   
 				      error: function(err) {   
+				    	  layer.msg('回显失败', {icon: 5});
 				      }   
 				    });   
 		        

@@ -174,12 +174,17 @@ var editId ;
    				     data:JSON.stringify(obj.data.id),//将json对象转换成json字符串发送
    			         dataType:"json",
    				      success: function(data) {   
+   				    	if(data.code==1){
+				    	 		layer.msg('删除失败', {icon: 5});
+				    	 		return;
+				    	 	}
    				    	  $(".layui-laypage-btn")[0].click();
    				    	  layer.msg("操作成功！", {icon: 1, time: 1300}, function () {
    		                      
    		                    });
    				      },   
    				      error: function(err) {   
+   					 	  layer.msg('操作失败', {icon: 5});
    				      }   
    				    }); 
                     layer.msg("操作成功！", {icon: 1, time: 1000});
@@ -269,7 +274,6 @@ var editId ;
                     for (var i = 0; i < checkStatus.data.length; i++) {
                         idsStr += checkStatus.data[i].id + ',';
                     }
-                    console.log("选择的id-->" + idsStr);
                     $.ajax({   
     				      type: "DELETE",   
     				      url: "/hos/quality/removeMulti?ids="+idsStr,   
@@ -277,12 +281,17 @@ var editId ;
     				     data:JSON.stringify(idsStr),//将json对象转换成json字符串发送
     			         dataType:"json",
     				      success: function(data) {   
+     				    	 	if(data.code==1){
+     				    	 		layer.msg('删除失败', {icon: 5});
+     				    	 		return;
+     				    	 	}
     				    	  $(".layui-laypage-btn")[0].click();
     				    	  layer.msg("操作成功！", {icon: 1, time: 1300}, function () {
     		                      
     		                    });
     				      },   
     				      error: function(err) {   
+    				    	  layer.msg('操作失败', {icon: 5});
     				      }   
     				    });   
                   
@@ -296,7 +305,6 @@ var editId ;
         })
 /*]]>*/
         $("#addUser").click(function () {
-        	console.log("==")
         	editId ="";
             layer.open({
                 title: '添加质控人员',

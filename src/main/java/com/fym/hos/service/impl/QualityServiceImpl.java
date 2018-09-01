@@ -15,11 +15,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import com.fym.hos.dao.PatientRepository;
 import com.fym.hos.dao.QualityRepository;
 import com.fym.hos.dto.PageDto;
 import com.fym.hos.dto.PageQueryDto;
+import com.fym.hos.dto.TPatientDto;
 import com.fym.hos.dto.TQualityDto;
 import com.fym.hos.entity.TQuality;
+import com.fym.hos.service.PatientService;
 import com.fym.hos.service.QualityService;
 import com.fym.utils.BeanMapperUtils;
 
@@ -28,6 +31,8 @@ public class QualityServiceImpl implements QualityService {
 
     @Autowired
     private QualityRepository qualityRepository;
+    @Autowired
+    PatientService patientService;
     /**
 	 * 保存方法
 	 * @param tQuality 质控人员
@@ -165,5 +170,20 @@ public class QualityServiceImpl implements QualityService {
                 BeanMapperUtils.mapList(findAll.getContent(), TQuality.class, TQualityDto.class));
     }
 
-
+	@Override
+	public boolean isCite(String ids,String type) {
+		List<TPatientDto> patientList = patientService.findAll("");
+		for (TPatientDto tPatientDto : patientList) {
+			if(type.equals("doctor")){
+				if(ids.contains(tPatientDto.getDoctor().getId())){
+					return false;
+				}
+			}else{
+				if(ids.contains(tPatientDto.getQuality().getId())){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 }

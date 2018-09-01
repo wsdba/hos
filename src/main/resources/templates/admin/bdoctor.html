@@ -153,12 +153,17 @@ var editId ;
       				     data:JSON.stringify(obj.data.id),//将json对象转换成json字符串发送
       			         dataType:"json",
       				      success: function(data) {   
+      				    	if(data.code==1){
+ 				    	 		layer.msg('删除失败', {icon: 5});
+ 				    	 		return ; 
+ 				    	 	}
       				    	  $(".layui-laypage-btn")[0].click();
       				    	  layer.msg("操作成功！", {icon: 1, time: 1300}, function () {
       		                      
       		                    });
       				      },   
       				      error: function(err) {   
+      				  	  layer.msg('操作失败', {icon: 5});
       				      }   
       				    }); 
                     layer.msg("操作成功！", {icon: 1, time: 1000});
@@ -259,12 +264,17 @@ var editId ;
   				    	/*   layer.msg("添加成功！", {icon: 6, time: 500, anim: 4}, function () {
   				                parent.layer.close(parent.layer.getFrameIndex(window.name));
   				            }); */
+  				    	if(data.code==1){
+				    	 		layer.msg('删除失败', {icon: 5});
+				    	 		return;
+				    	 	}
   				    	  $(".layui-laypage-btn")[0].click();
   				    	  layer.msg("操作成功！", {icon: 1, time: 1300}, function () {
   		                      
   		                    });
   				      },   
   				      error: function(err) {   
+  				  	  layer.msg('操作失败', {icon: 5});
   				      }   
   				    });   
                 

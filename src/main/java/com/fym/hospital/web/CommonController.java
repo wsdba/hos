@@ -20,7 +20,7 @@ public class CommonController {
 	}
 	@RequestMapping
     public String execute(){
-        return "admin/admin";
+        return "admin/login";
     }
 	
 	

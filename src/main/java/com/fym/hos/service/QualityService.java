@@ -54,5 +54,5 @@ public interface QualityService {
 	 */
 	PageDto<TQualityDto> pageByApp(PageQueryDto<TQuality> page,String theName);
 
-
+    boolean isCite(String ids,String type);
 }

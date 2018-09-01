@@ -4,9 +4,12 @@ import com.fym.hos.dto.GlobalResponse;
 import com.fym.hos.dto.PageQueryDto;
 import com.fym.hos.dto.Show;
 import com.fym.hos.dto.TDoctorDto;
+import com.fym.hos.dto.TPatientDto;
 import com.fym.hos.dto.TQualityDto;
 import com.fym.hos.entity.TDoctor;
+import com.fym.hos.entity.TQuality;
 import com.fym.hos.service.DoctorService;
+import com.fym.hos.service.QualityService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +24,8 @@ public class DoctorController {
 	@Autowired
 	private DoctorService doctorService;
 	 
-
+	@Autowired
+	private QualityService qualityService;
 
     /**
      * 保存
@@ -127,6 +131,10 @@ public class DoctorController {
      */
     @DeleteMapping("/removeMulti")
     public GlobalResponse<TDoctor> removeMulti(String ids) {
+    	boolean flag = qualityService.isCite(ids,"doctor");
+    	if(flag == false){
+    		 return new GlobalResponse<TDoctor>(1, "删除失败");
+    	}
     	doctorService.removeMulti(ids);
         return new GlobalResponse<TDoctor>(0, "删除成功");
     }

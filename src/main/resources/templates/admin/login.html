@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>病案信息系统登录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta>
+    <meta name="keywords" content="ok-admin v1.0,ok-admin网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载"></meta>
+    <meta name="description" content="ok-admin v1.0，顾名思义，很赞的后台模版，它是一款基于Layui框架的轻量级扁平化且完全免费开源的网站后台管理系统模板，适合中小型CMS后台系统。"></meta>
+    <link rel="shortcut icon" href="/../images/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="/../layui/css/layui.css"/>
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_693759_ask70l8wanw.css"/>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css"/>
+    <link rel="stylesheet" href="/../css/login.css"/>
+	<link rel="stylesheet" href="/../css/nprogress/nprogress.css"/>
+</head>
+<body>
+    <div class="login-box animated rotateIn">
+        <div class="head"></div>
+        <div class="input-box">
+            <form class="layui-form" lay-filter="formLay" method="post">
+                <input type="text" name="account"   lay-verify="required" placeholder="账号" autocomplete="off" class="layui-input"/>
+                <input type="password" name="password"   lay-verify="required" placeholder="密码" autocomplete="off" class="layui-input"/>
+               <!--  <div class="remember-me">
+                    <span>记住我：</span>
+                    <input type="checkbox" name="zzz" lay-skin="switch" lay-text="是|否"/>
+                </div> -->
+                <input type="button" value="登 录" lay-submit="" lay-filter="lo"/>
+            </form>z
+        </div>
+        <div class="copyright">
+            © 2018-2019 FT. All rights reserved.
+        </div>
+    </div>
+    <!--js逻辑-->
+    <script src="/../layui/layui.js"></script>
+	<script src="/../css/nprogress/nprogress.js"></script>
+    <script>
+		NProgress.start();
+		window.onload = function() {
+		    NProgress.done();
+		}
+        layui.use(['form', 'jquery'], function () {
+            var form = layui.form;
+            var $ = layui.jquery;
+            form.on('submit(lo)', function (data) {
+				 $.ajax({   
+				      type: "POST",   
+				      url: "/hos/user/login",   
+				      contentType: "application/json; charset=utf-8",
+				      data:JSON.stringify(data.field),
+				      success: function(data) {   
+				    	  console.log(data)
+				    	  if(data.code==1){
+				    	  layer.msg("登录成功！", {icon: 6, time: 500, anim: 4}, function () {
+				    		  	window.location.href = "/to?page=admin/admin";
+				               /*  parent.layer.close(parent.layer.getFrameIndex(window.name)); */
+				            });
+				    	  }else{
+				    		  
+				    		  layer.msg('账号或密码错误', {icon: 5,time:800});
+				    	  }
+				      },   
+				      error: function(err) {   
+				    	  layer.msg("登录失败！", {icon: 6, time: 500, anim: 4}, function () {
+				               /*  parent.layer.close(parent.layer.getFrameIndex(window.name)); */
+				            });
+				      }   
+				    });  
+            	 
+            });
+        });
+    </script>
+</body>
+</html>
