@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS user ;
+DROP TABLE IF EXISTS t_user ;
 CREATE TABLE `t_user` (
   `id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `the_name` varchar(20) NOT NULL COMMENT '姓名',
