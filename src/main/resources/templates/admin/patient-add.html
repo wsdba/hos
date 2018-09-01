@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8"></meta>
-    <title>添加病例</title>
+    <title>添加病案</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta>
     <link rel="stylesheet" href="/../layui/css/layui.css"/>
     <link rel="stylesheet" href="/../css/scroll-bar.css"/>
@@ -19,13 +19,13 @@
             <div class="layui-inline half_table">
             <label class="layui-form-label">住院号</label>
 	            <div class="layui-input-block">
-	                <input type="text" name="hNumber" placeholder="请输入住院号" autocomplete="off" class="layui-input" lay-verify="required"/>
+	                <input type="text" name="hNumber" placeholder="请输入住院号" autocomplete="off" class="layui-input" lay-verify="number"   />
 	            </div>
             </div>
             <div class="layui-inline half_table">
 	            <label class="layui-form-label">床位号</label>
 	            <div class="layui-input-block">
-	                <input type="text" name="bedNumber" placeholder="请输入床位号" autocomplete="off" class="layui-input" lay-verify="required"/>
+	                <input type="text" name="bedNumber" placeholder="请输入床位号" autocomplete="off" class="layui-input"  lay-verify="number"/>
 	            </div>
             </div>
           </div>
@@ -36,19 +36,19 @@
            </div>
             	<div style="float:left">
             	 <select name="endemicArea" lay-filter="aihao">
-				        <option name="endemicArea" value="2">二病区</option>
-				        <option name="endemicArea" value="3">三病区</option>
-				        <option name="endemicArea" value="4">四病区</option>
-				        <option name="endemicArea" value="5">五病区</option>
-				        <option name="endemicArea"  value="6">六病区</option>
-				        <option name="endemicArea" value="7">七病区</option>
+				        <option name="endemicArea1" value="2">二病区</option>
+				        <option name="endemicArea1" value="3">三病区</option>
+				        <option name="endemicArea1" value="4">四病区</option>
+				        <option name="endemicArea1" value="5">五病区</option>
+				        <option name="endemicArea1"  value="6">六病区</option>
+				        <option name="endemicArea1" value="7">七病区</option>
     	    	 </select>
     	    	 </div>
           </div>
             <div class="layui-inline half_table">
 	            <label class="layui-form-label">身份证号</label>
 	            <div class="layui-input-block">
-	                <input type="text" name="idNumber" placeholder="请输入身份证号" autocomplete="off" class="layui-input" />
+	                <input type="text" name="idNumber" placeholder="请输入身份证号" lay-verify="identity" autocomplete="off" class="layui-input" />
 	            </div>
             </div>
           </div>
@@ -71,7 +71,7 @@
          <div class="layui-inline half_table">
             <label class="layui-form-label">年龄</label>
             <div class="layui-input-block">
-                <input type="text" name="theAge" placeholder="请输入年龄" autocomplete="off" class="layui-input"/>
+                <input type="text" name="theAge" placeholder="请输入年龄" lay-verify="number" autocomplete="off" class="layui-input"/>
             </div>
             </div>
        	 	 <div class="layui-inline half_table">
@@ -91,7 +91,7 @@
        	  <div class="layui-inline half_table">
             <label class="layui-form-label">出院时间</label>
             <div class="layui-input-block">
-               <input name="outHospitalDate" id="outTime" lay-verify1="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input"  type="text"/>		           
+              	      <input name="outHospitalDate" id="outTime" lay-verify11="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input"  type="text"/>		           
                 </div>
             </div>
         </div>
@@ -125,7 +125,7 @@
        	   <div class="layui-inline half_table">
             <label class="layui-form-label">质控人</label>
             <div class="layui-input-block">
-                <input type="text" onclick="qualityList()" name="qualityName" placeholder="请输入归档人" autocomplete="off" class="layui-input" id="qualityName" lay-verify="birthdayVerify"/>
+                <input type="text" onclick="qualityList()" name="qualityName" placeholder="请输入归档人" autocomplete="off" class="layui-input" id="qualityName" lay-verify="required"/>
             </div>
             </div> 
        	<div class="layui-inline half_table">
@@ -191,7 +191,7 @@
         var laydate = layui.laydate;
 		
         laydate.render({
-            elem: '#inTime',
+            elem: '#inHospitalDate',
             type: "datetime"
         });
         laydate.render({
@@ -209,19 +209,36 @@
         form.on('submit(add)', function (data) {
 			var editId = parent.editId;
 			data = idToArray(data);
+			var h = document.getElementsByName("hNumber")[0].value;
+			var b = document.getElementsByName("bedNumber")[0].value;
+			if(h!=""&&h.length!=5){
+				  layer.msg("住院号只能五位数", {icon: 5, time: 1000, anim: 4}, function () {
+					  return;
+		            });
+			}
+			 if(b!=""&&b.length!=2){
+				 layer.msg("床位号只能两位", {icon: 5, time: 1000, anim: 4}, function () {
+					 return;
+		            });
+			} 
+			 
 			if(editId!=""&&editId!=undefined){
 				 $.ajax({   
 				      type: "PUT",   
 				      url: "/hos/patient/"+editId,   
 				      contentType: "application/json; charset=utf-8",
 				      data:JSON.stringify(data.field),
-				      success: function(data) {   
+				      success: function(data) { 
+				    	  if(data.code==3){
+				    	 		layer.msg('住院号重复', {icon: 5});
+				    	 		return;
+				    	 	}
 				    	  layer.msg("修改成功！", {icon: 6, time: 500, anim: 4}, function () {
 				                parent.layer.close(parent.layer.getFrameIndex(window.name));
 				            });
 				      },   
 				      error: function(err) {   
-				    	  layer.msg('修改失败', {icon: 5});
+				    	/*   layer.msg('修改失败', {icon: 5}); */
 				      }   
 				    });  
 			}else{
@@ -231,6 +248,10 @@
 				      contentType: "application/json; charset=utf-8",
 				      data:JSON.stringify(data.field),
 				      success: function(data) {   
+				    	  if(data.code==3){
+				    	 		layer.msg('住院号重复', {icon: 5});
+				    	 		return;
+				    	 	}
 				    	  layer.msg("添加成功！", {icon: 6, time: 500, anim: 4}, function () {
 				                parent.layer.close(parent.layer.getFrameIndex(window.name));
 				            });
@@ -296,7 +317,6 @@ window.onload=function(){
 				    	var ad = new Date(data.object.archiveDate)
 				      	var adString ;
 				    	adString =dateFtt("yyyy-MM-dd hh:mm:ss",ad); 
-				    	console.log(data.object)
 				    	  form.val("formLay", {
 					            "theName": data.object.theName // "name": "value"
 					            ,"theSex": data.object.theSex

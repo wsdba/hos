@@ -36,6 +36,7 @@ public class PatientServiceImpl implements PatientService {
     @Override
     @Transactional
 	public TPatientDto save(TPatient tPatient) {
+    	tPatient.gethNumber();
     	tPatient = patientRepository.saveAndFlush(tPatient);
         return BeanMapperUtils.map(tPatient,TPatientDto.class);
     }

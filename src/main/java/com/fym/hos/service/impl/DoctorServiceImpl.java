@@ -35,7 +35,7 @@ public class DoctorServiceImpl implements DoctorService {
 
     /**
 	 * 保存方法
-	 * @param tpatient 病例实体
+	 * @param tpatient 病案实体
 	 * @return
 	 */
     @Override

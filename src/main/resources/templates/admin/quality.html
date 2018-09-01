@@ -120,7 +120,7 @@ var editId ;
 
         form.on('submit(search)', function () {
         	var theName = document.getElementById("name").value;
-            layer.msg('正在查询，请稍后...');
+            layer.msg('正在查询，请稍后...',{time:400});
         	table.render({
                 elem: '#tableId',
                 url: '/hos/quality/?theName='+theName,

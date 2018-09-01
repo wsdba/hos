@@ -40,6 +40,13 @@ public class PatientController {
     public GlobalResponse<TPatient> add(@RequestBody TPatient tPatient) {
         /*TPatientDto tPatientDto = patientService.save(tPatient);
         return new GlobalResponse<TPatientDto>(tPatientDto);*/
+    	List<TPatientDto> list = patientService.findAll("");
+    	for (TPatientDto tPatientDto : list) {
+ 			if(tPatientDto.gethNumber().equals(tPatient.gethNumber())){
+		          return new GlobalResponse<TPatient>(3, "住院号重复");
+
+			}
+		}
     	patientService.save(tPatient); 
           return new GlobalResponse<TPatient>(0, "保存成功");
     }
@@ -140,6 +147,19 @@ public class PatientController {
     @PutMapping("/{id}")
     @CrossOrigin
     public GlobalResponse<TPatient> update(@PathVariable String id, @RequestBody TPatient tPatient) {
+    	TPatientDto t1 = patientService.get(id);
+    	BigInteger tid = t1.gethNumber();
+    	
+    	List<TPatientDto> list = patientService.findAll("");
+    	if(!tid.equals(tPatient.gethNumber())){
+    		
+    	for (TPatientDto tPatientDto : list) {
+ 			if(tPatientDto.gethNumber().equals(tPatient.gethNumber())){
+		          return new GlobalResponse<TPatient>(3, "住院号重复");
+
+			}
+    		}
+    	}
     	patientService.save(tPatient);
         return new GlobalResponse<TPatient>(0, "更新成功");
     }

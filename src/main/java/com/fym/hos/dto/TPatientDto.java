@@ -290,17 +290,17 @@ public class TPatientDto {
     }
 
     public String getEndemicAreaText() {
-       if(endemicArea==1){
+       if(endemicArea==3){
            return "三病区";
-       }else if(endemicArea==2){
+       }else if(endemicArea==4){
            return "四病区";
-       }else if(endemicArea==3){
+       }else if(endemicArea==5){
 
            return "五病区";
-       }else if(endemicArea==4){
+       }else if(endemicArea==6){
 
            return "六病区";
-       }else if(endemicArea==5){
+       }else if(endemicArea==7){
            return "七病区";
        }else
            return "二病区";
