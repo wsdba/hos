@@ -1,10 +1,10 @@
 package com.fym.hospital.web;
 
-import com.fym.hos.dto.GlobalResponse;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fym.hos.dto.GlobalResponse;
 
 /**
  * Created by Administrator on 2018/8/27.

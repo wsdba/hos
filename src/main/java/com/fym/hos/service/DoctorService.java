@@ -57,4 +57,5 @@ public interface DoctorService {
 	 * @return
 	 */
 	PageDto<TDoctorDto> pageByApp(PageQueryDto<TDoctor> page, String theName);
+ 
 }

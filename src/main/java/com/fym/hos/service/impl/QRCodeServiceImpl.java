@@ -1,4 +1,4 @@
-package com.fym.hos.service.impl;
+/*package com.fym.hos.service.impl;
 
 import java.awt.image.BufferedImage;
 
@@ -23,3 +23,4 @@ public class QRCodeServiceImpl implements QRCodeService {
 	}
 
 }
+*/

@@ -64,11 +64,11 @@ public class QualityController {
      */
     @GetMapping("/")
 //    public GlobalResponse<TQualityDto> page(PageQueryDto<TQuality> page, String theName,@RequestParam(name="page") int cPage,@RequestParam(name="limit") int limit) {
-    public Show page(PageQueryDto<TQuality> page, String theName,@RequestParam(name="page") int cPage,@RequestParam(name="limit") int limit) {
+    public Show<TQualityDto> page(PageQueryDto<TQuality> page, String theName,@RequestParam(name="page") int cPage,@RequestParam(name="limit") int limit) {
     	page.setCurrentPage(cPage-1);
     	page.setPageSize(limit);
 //    	System.out.println(new GlobalResponse<TQualityDto>(qualityService.page(page, theName)).getPage().getData().get(1).getTheName());
-    	Show show = new Show();
+    	Show<TQualityDto> show = new Show<TQualityDto>();
     	List<TQualityDto> tq = new ArrayList<TQualityDto>();
     	GlobalResponse<TQualityDto>  g = findAll(theName);
     	tq = new GlobalResponse<TQualityDto>(qualityService.page(page, theName)).getPage().getData();

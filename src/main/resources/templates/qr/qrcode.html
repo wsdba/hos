@@ -3,9 +3,34 @@
 <head>
 <meta charset="UTF-8"></meta>
 <title>Insert title here</title>
+<style type="text/css">
+#parent {
+line-height: 200px;
+}
+#parent img {
+vertical-align: middle;
+margin-left:70px;
+}
+</style>
 </head>
 <body>
-	
-	<img id="qrId"  src="" />
+	<div id="parent" style="width:100px;height:100px">
+	<img id="qrId"  src=""   />
+	</div>
 </body>
+<script src="/../layui/layui.js"></script>
+<script type="text/javascript">
+/* <![CDATA[*/       
+	var editId = parent.editId;
+	   layui.use(['element', 'jquery',  ], function () {
+		   
+		   var $ = layui.jquery;
+		   
+		   $("#qrId").attr("src","/createQrCode?id="+editId);
+	   });
+	
+	
+
+/*]]>*/
+</script>
 </html>

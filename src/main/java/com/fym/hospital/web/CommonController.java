@@ -1,18 +1,21 @@
 package com.fym.hospital.web;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.fym.hos.service.QualityService;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.fym.utils.QRCodeUtils;
 
 @Controller
 @RequestMapping("/")
 public class CommonController {
 	
-	@Autowired
-	private QualityService qualityService;
 	
 	@RequestMapping("/index")
 	public String add(String a){
@@ -28,5 +31,10 @@ public class CommonController {
 	public String toPage(String page){
 		return page;
 	}
-	
+	   
+    @GetMapping("/createQrCode")
+    public void createQrCode( HttpServletResponse response ,@RequestParam(name="id") String id) throws IOException {
+    	   ImageIO.write(QRCodeUtils.Creat(id, null, 10), "png", response.getOutputStream());
+    	
+    }
 }

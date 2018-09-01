@@ -206,7 +206,8 @@
 </div>
 <!--js逻辑-->
 <script src="/../layui/layui.js"></script>
-<script>
+<script type="text/javascript">
+/*<![CDATA[*/   
     /**
      * 初始化函数
      */
@@ -233,14 +234,17 @@
 
    
     function addZero(time) {
-    		  var i = parseInt(time);
-    		  /*<![CDATA[*/
+       var i = parseInt(time);
         if (i /10 < 1) {
-        	 //]]>
             i = "0" + i;
         }
         return i;
-    } 
+    }
+
+    /**
+     * 初始化星期几
+     * @type {string}
+     */
     var weekday = "星期" + "日一二三四五六".charAt(new Date().getDay());
     document.getElementById("weekday").innerHTML = weekday;
  
@@ -248,7 +252,7 @@
         var util = layui.util;
         util.fixbar({});
     });
-   
+    /*]]>*/
 </script>
 <!--天气预报插件-->
 <script>
