@@ -1,4 +1,4 @@
- INSERT INTO `t_user` VALUES ('40284a816574e157016574e1ba060021', '张无忌', 'admin', '123456');
+ INSERT INTO `t_user` VALUES ('40284a816574e157016574e1ba060021', 'admin', 'admin', '123456');
 -- ----------------------------
 -- Records of t_doctor
 -- ----------------------------
